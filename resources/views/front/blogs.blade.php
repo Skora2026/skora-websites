@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title', 'Health Blogs — Website')
+@section('title', 'Health Blogs — ' . (settings('company_name') ?? 'Website'))
 
 @section('content')
 

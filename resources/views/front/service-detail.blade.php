@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title', ($service->name ?? 'Service Detail') . ' — Website')
+@section('title', ($service->name ?? 'Service Detail') . ' — ' . (settings('company_name') ?? 'Website'))
 
 @section('content')
 

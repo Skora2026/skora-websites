@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title', 'P2GH - 24*7 Physiotherapy | Expert Care, Always Available')
+@section('title', (settings('company_name') ?? 'Website') . ' — Home')
 @section('navbar_class', 'transparent')
 
 @section('content')
