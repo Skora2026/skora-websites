@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title', ($blog->title ?? 'Blog') . ' — P2GH 24*7 Physiotherapy')
+@section('title', ($blog->title ?? 'Blog') . ' — Website')
 
 @section('content')
 

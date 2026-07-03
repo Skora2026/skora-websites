@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title', 'Contact Us — P2GH 24*7 Physiotherapy')
+@section('title', 'Contact Us — Website')
 
 @section('content')
 

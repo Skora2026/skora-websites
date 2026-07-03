@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Health Blogs — P2GH 24*7 Physiotherapy'); ?>
+<?php $__env->startSection('title', 'Health Blogs — Website'); ?>
 
 <?php $__env->startSection('content'); ?>
 

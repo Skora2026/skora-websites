@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', ($service->name ?? 'Service Detail') . ' — P2GH 24*7 Physiotherapy'); ?>
+<?php $__env->startSection('title', ($service->name ?? 'Service Detail') . ' — Website'); ?>
 
 <?php $__env->startSection('content'); ?>
 

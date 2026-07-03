@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Contact Us — P2GH 24*7 Physiotherapy'); ?>
+<?php $__env->startSection('title', 'Contact Us — Website'); ?>
 
 <?php $__env->startSection('content'); ?>
 
