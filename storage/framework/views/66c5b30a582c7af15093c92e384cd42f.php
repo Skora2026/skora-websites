@@ -4,67 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title', settings('company_name') ?? 'P2GH - 24*7 Physiotherapy')</title>
-    <meta name="description" content="@yield('meta_desc', 'P2GH - 24*7 Physiotherapy. Expert physiotherapy care available round the clock. Book your appointment today.')">
-    <link rel="icon" type="image/png" href="{{ settings('favicon') ? asset('storage/' . settings('favicon')) : asset('front_assets/images/logo.png') }}">
+    <title><?php echo $__env->yieldContent('title', settings('company_name') ?? 'P2GH - 24*7 Physiotherapy'); ?></title>
+    <meta name="description" content="<?php echo $__env->yieldContent('meta_desc', 'P2GH - 24*7 Physiotherapy. Expert physiotherapy care available round the clock. Book your appointment today.'); ?>">
+    <link rel="icon" type="image/png" href="<?php echo e(settings('favicon') ? asset('storage/' . settings('favicon')) : asset('front_assets/images/logo.png')); ?>">
 
-    {{-- Master CSS - Single file for entire website --}}
-    <link rel="stylesheet" href="{{ asset('front_assets/css/theme.css') }}">
+    
+    <link rel="stylesheet" href="<?php echo e(asset('front_assets/css/theme.css')); ?>">
 
-    {{-- External Libraries --}}
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=Jost:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    @stack('styles')
-    @include('layouts.notification')
+    <?php echo $__env->yieldPushContent('styles'); ?>
+    <?php echo $__env->make('layouts.notification', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 </head>
 <body>
 
-{{-- ===== TOP BAR ===== --}}
+
 <div class="p2gh-topbar d-none d-lg-block">
     <div class="topbar-inner">
         <div class="topbar-info">
-            @if(!empty(settings('company_address1')))
+            <?php if(!empty(settings('company_address1'))): ?>
             <a href="#" class="topbar-item">
                 <i class="bi bi-geo-alt-fill"></i>
-                <span>{{ settings('company_address1') }}</span>
+                <span><?php echo e(settings('company_address1')); ?></span>
             </a>
-            @endif
-            @if(!empty(settings('company_mobile1')))
-            <a href="tel:{{ settings('company_mobile1') }}" class="topbar-item">
+            <?php endif; ?>
+            <?php if(!empty(settings('company_mobile1'))): ?>
+            <a href="tel:<?php echo e(settings('company_mobile1')); ?>" class="topbar-item">
                 <i class="bi bi-telephone-fill"></i>
-                <span>{{ settings('company_mobile1') }}</span>
+                <span><?php echo e(settings('company_mobile1')); ?></span>
             </a>
-            @endif
+            <?php endif; ?>
             <div class="topbar-item">
                 <i class="bi bi-clock-fill"></i>
-                <span>{{ settings('working_hours') ?? 'Open 24 hours' }}</span>
+                <span><?php echo e(settings('working_hours') ?? 'Open 24 hours'); ?></span>
                 <span class="topbar-badge">24×7</span>
             </div>
         </div>
         <div class="topbar-socials">
-            @if(!empty(settings('instagram')))
-            <a href="{{ settings('instagram') }}" class="topbar-social-link" target="_blank"><i class="bi bi-instagram"></i></a>
-            @endif
-            @if(!empty(settings('facebook')))
-            <a href="{{ settings('facebook') }}" class="topbar-social-link" target="_blank"><i class="bi bi-facebook"></i></a>
-            @endif
-            @if(!empty(settings('company_whatsapp1')))
-            @php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); @endphp
-            <a href="https://wa.me/{{ $wp }}" class="topbar-social-link" target="_blank"><i class="bi bi-whatsapp"></i></a>
-            @endif
-            @if(!empty(settings('pintrest')))
-            <a href="{{ settings('pintrest') }}" class="topbar-social-link" target="_blank"><i class="bi bi-youtube"></i></a>
-            @endif
+            <?php if(!empty(settings('instagram'))): ?>
+            <a href="<?php echo e(settings('instagram')); ?>" class="topbar-social-link" target="_blank"><i class="bi bi-instagram"></i></a>
+            <?php endif; ?>
+            <?php if(!empty(settings('facebook'))): ?>
+            <a href="<?php echo e(settings('facebook')); ?>" class="topbar-social-link" target="_blank"><i class="bi bi-facebook"></i></a>
+            <?php endif; ?>
+            <?php if(!empty(settings('company_whatsapp1'))): ?>
+            <?php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); ?>
+            <a href="https://wa.me/<?php echo e($wp); ?>" class="topbar-social-link" target="_blank"><i class="bi bi-whatsapp"></i></a>
+            <?php endif; ?>
+            <?php if(!empty(settings('pintrest'))): ?>
+            <a href="<?php echo e(settings('pintrest')); ?>" class="topbar-social-link" target="_blank"><i class="bi bi-youtube"></i></a>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
-{{-- ===== NAVBAR ===== --}}
-@php $navbarClass = trim($__env->yieldContent('navbar_class', '')); @endphp
+
+<?php $navbarClass = trim($__env->yieldContent('navbar_class', '')); ?>
 <script>
 // Runs immediately as this point in the body is parsed — before CSS/JS
 // libraries load — so a scroll-restored page (e.g. after refresh mid-page)
@@ -75,74 +75,75 @@
     }
 })();
 </script>
-<nav class="p2gh-navbar {{ $navbarClass }}" id="mainNav" data-hero="{{ $navbarClass === 'transparent' ? '1' : '0' }}">
+<nav class="p2gh-navbar <?php echo e($navbarClass); ?>" id="mainNav" data-hero="<?php echo e($navbarClass === 'transparent' ? '1' : '0'); ?>">
     <div class="nav-inner">
 
-        {{-- Logo --}}
-        <a href="{{ url('/') }}" class="nav-logo">
-            <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('front_assets/images/logo.png') }}"
-                 alt="{{ settings('company_short_name') ?? 'P2GH' }}">
+        
+        <a href="<?php echo e(url('/')); ?>" class="nav-logo">
+            <img src="<?php echo e(settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('front_assets/images/logo.png')); ?>"
+                 alt="<?php echo e(settings('company_short_name') ?? 'P2GH'); ?>">
         </a>
 
-        {{-- Menu --}}
+        
         <ul class="nav-menu" id="navMenu">
             <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link">Home</a>
+                <a href="<?php echo e(url('/')); ?>" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/about-us') }}" class="nav-link">About</a>
+                <a href="<?php echo e(url('/about-us')); ?>" class="nav-link">About</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link" style="display:flex;align-items:center;gap:5px;">
                     Services <i class="bi bi-chevron-down" style="font-size:11px;"></i>
                 </a>
                 <div class="nav-dropdown">
-                    @forelse($services as $service)
-                    <a href="{{ url('/service-details/' . $service->slug) }}">
+                    <?php $__empty_1 = true; $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <a href="<?php echo e(url('/service-details/' . $service->slug)); ?>">
                         <i class="bi bi-activity" style="color:var(--primary);font-size:13px;"></i>
-                        {{ $service->name }}
+                        <?php echo e($service->name); ?>
+
                     </a>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <a href="#">No services found</a>
-                    @endforelse
+                    <?php endif; ?>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ url('/services') }}" style="font-weight:700;color:var(--primary);">
+                    <a href="<?php echo e(url('/services')); ?>" style="font-weight:700;color:var(--primary);">
                         <i class="bi bi-grid-3x3-gap" style="font-size:13px;"></i>
                         View All Services
                     </a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/blogs') }}" class="nav-link">Blogs</a>
+                <a href="<?php echo e(url('/blogs')); ?>" class="nav-link">Blogs</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link" style="display:flex;align-items:center;gap:5px;">
                     Gallery <i class="bi bi-chevron-down" style="font-size:11px;"></i>
                 </a>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/gallery') }}"><i class="bi bi-images" style="color:var(--primary);font-size:13px;"></i> Photo Gallery</a>
-                    <a href="{{ url('/video') }}"><i class="bi bi-camera-video" style="color:var(--primary);font-size:13px;"></i> Video Gallery</a>
+                    <a href="<?php echo e(url('/gallery')); ?>"><i class="bi bi-images" style="color:var(--primary);font-size:13px;"></i> Photo Gallery</a>
+                    <a href="<?php echo e(url('/video')); ?>"><i class="bi bi-camera-video" style="color:var(--primary);font-size:13px;"></i> Video Gallery</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/contact-us') }}" class="nav-link">Contact</a>
+                <a href="<?php echo e(url('/contact-us')); ?>" class="nav-link">Contact</a>
             </li>
         </ul>
 
-        {{-- CTA --}}
+        
         <div class="nav-cta">
             <button class="btn-p2gh openForm" style="padding:11px 22px;font-size:13px;">
                 <span>Book Appointment</span>
                 <span class="btn-icon">↗</span>
             </button>
-            @auth
-                @if(auth()->user()->role === 'admin')
-                <a href="{{ url('/admin-dashboard') }}" class="btn-p2gh-outline" style="padding:10px 18px;font-size:13px;">Dashboard</a>
-                @endif
-            @endauth
+            <?php if(auth()->guard()->check()): ?>
+                <?php if(auth()->user()->role === 'admin'): ?>
+                <a href="<?php echo e(url('/admin-dashboard')); ?>" class="btn-p2gh-outline" style="padding:10px 18px;font-size:13px;">Dashboard</a>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
 
-        {{-- Mobile toggle --}}
+        
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
             <span></span><span></span><span></span>
         </button>
@@ -150,114 +151,114 @@
     </div>
 </nav>
 
-{{-- ===== PAGE CONTENT ===== --}}
-@yield('content')
 
-{{-- ===== TICKER (Dynamic — from HeroBanner.move_text, split by "||") ===== --}}
+<?php echo $__env->yieldContent('content'); ?>
+
+
 <div class="p2gh-ticker">
     <div class="ticker-wrapper">
-        @php $tickerItems = hero_ticker_items(); @endphp
-        @foreach($tickerItems as $item)
-        <span class="ticker-item"><span class="t-dot"></span>{{ $item }}</span>
-        @endforeach
-        {{-- Duplicate for seamless loop --}}
-        @foreach($tickerItems as $item)
-        <span class="ticker-item"><span class="t-dot"></span>{{ $item }}</span>
-        @endforeach
+        <?php $tickerItems = hero_ticker_items(); ?>
+        <?php $__currentLoopData = $tickerItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <span class="ticker-item"><span class="t-dot"></span><?php echo e($item); ?></span>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        
+        <?php $__currentLoopData = $tickerItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <span class="ticker-item"><span class="t-dot"></span><?php echo e($item); ?></span>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 </div>
 
-{{-- ===== FOOTER ===== --}}
+
 <footer class="p2gh-footer">
     <div class="container-p2gh">
         <div class="footer-grid">
 
-            {{-- Brand --}}
+            
             <div class="footer-brand">
-                <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('front_assets/images/logo.png') }}"
-                     alt="{{ settings('company_short_name') }}" class="brand-logo">
-                <p class="brand-desc">{{ settings('company_description') ?? 'Expert physiotherapy care available round the clock. We help you recover faster and live pain-free.' }}</p>
+                <img src="<?php echo e(settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('front_assets/images/logo.png')); ?>"
+                     alt="<?php echo e(settings('company_short_name')); ?>" class="brand-logo">
+                <p class="brand-desc"><?php echo e(settings('company_description') ?? 'Expert physiotherapy care available round the clock. We help you recover faster and live pain-free.'); ?></p>
                 <div class="footer-socials">
-                    @if(!empty(settings('instagram')))
-                    <a href="{{ settings('instagram') }}" class="footer-social" target="_blank"><i class="bi bi-instagram"></i></a>
-                    @endif
-                    @if(!empty(settings('facebook')))
-                    <a href="{{ settings('facebook') }}" class="footer-social" target="_blank"><i class="bi bi-facebook"></i></a>
-                    @endif
-                    @if(!empty(settings('company_whatsapp1')))
-                    @php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); @endphp
-                    <a href="https://wa.me/{{ $wp }}" class="footer-social" target="_blank"><i class="bi bi-whatsapp"></i></a>
-                    @endif
-                    @if(!empty(settings('pintrest')))
-                    <a href="{{ settings('pintrest') }}" class="footer-social" target="_blank"><i class="bi bi-youtube"></i></a>
-                    @endif
+                    <?php if(!empty(settings('instagram'))): ?>
+                    <a href="<?php echo e(settings('instagram')); ?>" class="footer-social" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty(settings('facebook'))): ?>
+                    <a href="<?php echo e(settings('facebook')); ?>" class="footer-social" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty(settings('company_whatsapp1'))): ?>
+                    <?php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); ?>
+                    <a href="https://wa.me/<?php echo e($wp); ?>" class="footer-social" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty(settings('pintrest'))): ?>
+                    <a href="<?php echo e(settings('pintrest')); ?>" class="footer-social" target="_blank"><i class="bi bi-youtube"></i></a>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            {{-- Quick Links --}}
+            
             <div class="footer-col">
                 <h5>Quick Links</h5>
                 <ul class="footer-links">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/about-us') }}">About Us</a></li>
-                    <li><a href="{{ url('/services') }}">Services</a></li>
-                    <li><a href="{{ url('/blogs') }}">Blogs</a></li>
-                    <li><a href="{{ url('/gallery') }}">Gallery</a></li>
-                    <li><a href="{{ url('/contact-us') }}">Contact</a></li>
+                    <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                    <li><a href="<?php echo e(url('/about-us')); ?>">About Us</a></li>
+                    <li><a href="<?php echo e(url('/services')); ?>">Services</a></li>
+                    <li><a href="<?php echo e(url('/blogs')); ?>">Blogs</a></li>
+                    <li><a href="<?php echo e(url('/gallery')); ?>">Gallery</a></li>
+                    <li><a href="<?php echo e(url('/contact-us')); ?>">Contact</a></li>
                 </ul>
             </div>
 
-            {{-- Services --}}
+            
             <div class="footer-col">
                 <h5>Our Services</h5>
                 <ul class="footer-links">
-                    @forelse($services as $service)
-                    <li><a href="{{ url('/service-details/' . $service->slug) }}">{{ $service->name }}</a></li>
-                    @empty
+                    <?php $__empty_1 = true; $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <li><a href="<?php echo e(url('/service-details/' . $service->slug)); ?>"><?php echo e($service->name); ?></a></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <li><span style="color:rgba(255,255,255,0.3);font-size:14px;">No services found</span></li>
-                    @endforelse
+                    <?php endif; ?>
                 </ul>
             </div>
 
-            {{-- Contact --}}
+            
             <div class="footer-col">
                 <h5>Contact Us</h5>
 
-                @if(!empty(settings('company_address2')))
+                <?php if(!empty(settings('company_address2'))): ?>
                 <div class="footer-contact-item">
                     <div class="fci-icon"><i class="bi bi-geo-alt-fill"></i></div>
                     <div class="fci-text">
                         <h6>Address</h6>
-                        <p>{{ settings('company_address2') }}</p>
+                        <p><?php echo e(settings('company_address2')); ?></p>
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                @if(!empty(settings('company_email1')))
+                <?php if(!empty(settings('company_email1'))): ?>
                 <div class="footer-contact-item">
                     <div class="fci-icon"><i class="bi bi-envelope-fill"></i></div>
                     <div class="fci-text">
                         <h6>Email</h6>
-                        <a href="mailto:{{ settings('company_email1') }}">{{ settings('company_email1') }}</a>
+                        <a href="mailto:<?php echo e(settings('company_email1')); ?>"><?php echo e(settings('company_email1')); ?></a>
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                @if(!empty(settings('company_mobile1')))
+                <?php if(!empty(settings('company_mobile1'))): ?>
                 <div class="footer-contact-item">
                     <div class="fci-icon"><i class="bi bi-telephone-fill"></i></div>
                     <div class="fci-text">
                         <h6>Phone</h6>
-                        <a href="tel:{{ settings('company_mobile1') }}">{{ settings('company_mobile1') }}</a>
+                        <a href="tel:<?php echo e(settings('company_mobile1')); ?>"><?php echo e(settings('company_mobile1')); ?></a>
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
                 <div class="footer-contact-item">
                     <div class="fci-icon"><i class="bi bi-clock-fill"></i></div>
                     <div class="fci-text">
                         <h6>Working Hours</h6>
-                        <p>{{ settings('working_hours') ?? 'Open 24 hours' }}</p>
+                        <p><?php echo e(settings('working_hours') ?? 'Open 24 hours'); ?></p>
                     </div>
                 </div>
             </div>
@@ -265,13 +266,13 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© {{ date('Y') }} {{ settings('company_name') ?? 'P2GH - 24*7 Physiotherapy' }}. All rights reserved.</p>
+            <p>© <?php echo e(date('Y')); ?> <?php echo e(settings('company_name') ?? 'P2GH - 24*7 Physiotherapy'); ?>. All rights reserved.</p>
             <p>Designed & Developed by <a href="https://www.skorasoft.com/" target="_blank">SkoraSoft</a></p>
         </div>
     </div>
 </footer>
 
-{{-- ===== POPUP APPOINTMENT FORM ===== --}}
+
 <div class="p2gh-popup" id="popupForm">
     <div class="popup-box">
         <div class="popup-header">
@@ -282,8 +283,8 @@
             <button class="popup-close" id="closeForm">✕</button>
         </div>
         <div class="popup-body">
-            <form action="{{ route('admin.appointments.save') }}" method="POST">
-                @csrf
+            <form action="<?php echo e(route('admin.appointments.save')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
                 <div class="form-group">
                     <label class="form-label">Full Name *</label>
                     <input type="text" name="name" class="form-control-p2gh" placeholder="Your full name" required>
@@ -300,11 +301,11 @@
                     <label class="form-label">Select Service *</label>
                     <select name="service" class="form-control-p2gh" required>
                         <option value="">Choose a service</option>
-                        @forelse($services as $service)
-                        <option value="{{ $service->name }}">{{ $service->name }}</option>
-                        @empty
+                        <?php $__empty_1 = true; $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                        <option value="<?php echo e($service->name); ?>"><?php echo e($service->name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <option disabled>No services available</option>
-                        @endforelse
+                        <?php endif; ?>
                     </select>
                 </div>
                 <div class="form-group">
@@ -320,22 +321,22 @@
     </div>
 </div>
 
-{{-- ===== FLOATING BUTTONS ===== --}}
+
 <div class="float-actions">
-    @if(!empty(settings('company_whatsapp1')))
-    @php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); @endphp
-    <a href="https://wa.me/{{ $wp }}?text=Hello, I would like to book a physiotherapy appointment." class="float-btn whatsapp" target="_blank" title="WhatsApp Us">
+    <?php if(!empty(settings('company_whatsapp1'))): ?>
+    <?php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); ?>
+    <a href="https://wa.me/<?php echo e($wp); ?>?text=Hello, I would like to book a physiotherapy appointment." class="float-btn whatsapp" target="_blank" title="WhatsApp Us">
         <i class="bi bi-whatsapp"></i>
     </a>
-    @endif
-    @if(!empty(settings('company_mobile1')))
-    <a href="tel:{{ settings('company_mobile1') }}" class="float-btn phone" title="Call Us">
+    <?php endif; ?>
+    <?php if(!empty(settings('company_mobile1'))): ?>
+    <a href="tel:<?php echo e(settings('company_mobile1')); ?>" class="float-btn phone" title="Call Us">
         <i class="bi bi-telephone-fill"></i>
     </a>
-    @endif
+    <?php endif; ?>
 </div>
 
-{{-- ===== SCRIPTS ===== --}}
+
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -492,6 +493,6 @@ if (counterEls.length) {
 }
 </script>
 
-@stack('scripts')
+<?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\dr_deepak_pal\resources\views/layouts/frontend.blade.php ENDPATH**/ ?>

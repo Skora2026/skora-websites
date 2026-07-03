@@ -14,34 +14,12 @@
     </div>
 </div>
 
-{{-- ===== ABOUT (Dynamic) ===== --}}
-<section class="p2gh-section">
+{{-- ===== ABOUT + STATS (Merged — navy panel, image right) ===== --}}
+<section class="p2gh-section ddp-about-stats">
     <div class="container-p2gh">
-        <div class="about-grid">
-            <div class="about-images-wrap" data-aos="fade-right">
-                <div class="about-img-main">
-                    @if($aboutsection && $aboutsection->center_image)
-                        <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'P2GH' }} Physiotherapy">
-                    @else
-                        <img src="{{ asset('front_assets/images/aa.jpeg') }}" alt="P2GH Physiotherapy">
-                    @endif
-                </div>
-                <div class="about-img-small">
-                    @if($aboutsection && $aboutsection->small_image)
-                        <img src="{{ asset('storage/'.$aboutsection->small_image) }}" alt="Therapy">
-                    @else
-                        <img src="{{ asset('front_assets/images/aaa.jpeg') }}" alt="Therapy">
-                    @endif
-                </div>
-                <div class="about-exp-badge">
-                    @php
-                        $expCounter = $progressCounters->firstWhere('title', 'Years Experience') ?? $progressCounters->first();
-                    @endphp
-                    <span class="num">{{ $expCounter ? $expCounter->number.$expCounter->suffix : '20+' }}</span>
-                    <span class="label">Years of<br>Expertise</span>
-                </div>
-            </div>
-            <div data-aos="fade-left">
+        <div class="ddp-panel">
+
+            <div class="ddp-panel-content" data-aos="fade-right">
                 <div class="section-label">{{ $aboutsection->sub_title ?? 'About ' . (settings('company_short_name') ?? 'P2GH') }}</div>
                 <h2 class="main-heading">
                     @if($aboutsection && $aboutsection->title_line1)
@@ -72,29 +50,51 @@
                     </a>
                     @endif
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-{{-- ===== STATS BAND (Dynamic) ===== --}}
-@if($progressCounters && $progressCounters->count())
-<section class="stats-section" style="padding:0;">
-    <div class="stats-grid">
-        @foreach($progressCounters as $counter)
-        <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-            <div class="stat-icon"><i class="bi {{ $counter->icon ?? 'bi-graph-up' }}"></i></div>
-            <div class="stat-num">
-                <span data-target="{{ $counter->number }}" data-suffix="{{ $counter->suffix ?? '+' }}">
-                    {{ $counter->number }}{{ $counter->suffix ?? '+' }}
-                </span>
+                @if($progressCounters && $progressCounters->count())
+                <div class="stats-grid">
+                    @foreach($progressCounters as $counter)
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                        <div class="stat-icon"><i class="bi {{ $counter->icon ?? 'bi-graph-up' }}"></i></div>
+                        <div class="stat-num">
+                            <span data-target="{{ $counter->number }}" data-suffix="{{ $counter->suffix ?? '+' }}">
+                                {{ $counter->number }}{{ $counter->suffix ?? '+' }}
+                            </span>
+                        </div>
+                        <div class="stat-label">{{ $counter->title }}</div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
             </div>
-            <div class="stat-label">{{ $counter->title }}</div>
+
+            <div class="about-images-wrap" data-aos="fade-left">
+                <div class="about-img-main">
+                    @if($aboutsection && $aboutsection->center_image)
+                        <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'P2GH' }} Physiotherapy">
+                    @else
+                        <img src="{{ asset('front_assets/images/aa.jpeg') }}" alt="P2GH Physiotherapy">
+                    @endif
+                </div>
+                <div class="about-img-small">
+                    @if($aboutsection && $aboutsection->small_image)
+                        <img src="{{ asset('storage/'.$aboutsection->small_image) }}" alt="Therapy">
+                    @else
+                        <img src="{{ asset('front_assets/images/aaa.jpeg') }}" alt="Therapy">
+                    @endif
+                </div>
+                <div class="about-exp-badge">
+                    @php
+                        $expCounter = $progressCounters->firstWhere('title', 'Years Experience') ?? $progressCounters->first();
+                    @endphp
+                    <span class="num">{{ $expCounter ? $expCounter->number.$expCounter->suffix : '20+' }}</span>
+                    <span class="label">Years of<br>Expertise</span>
+                </div>
+            </div>
+
         </div>
-        @endforeach
     </div>
 </section>
-@endif
 
 {{-- ===== OUR VALUES (Dynamic — from AboutSection.values, separate from homepage Why Choose Us) ===== --}}
 <section class="p2gh-section bg-section">
@@ -135,37 +135,6 @@
             </div>
             @endif
         </div>
-
-        @if($cta)
-        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;{{ $cta->background_image ? 'background-image:url(\''.asset('storage/'.$cta->background_image).'\');background-size:cover;background-position:center;' : '' }}">
-            <div>
-                <h3>{{ $cta->heading ?? 'Start Your Recovery Today' }}</h3>
-                <p>{{ $cta->description ?? 'Book your consultation — our team is ready 24x7 to help you.' }}</p>
-            </div>
-            @if(!empty($cta->button_link))
-            <a href="{{ $cta->button_link }}" class="btn-p2gh btn-p2gh-white" style="flex-shrink:0;">
-                <span>{{ $cta->button_text ?? 'Book Appointment' }}</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
-            </a>
-            @else
-            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
-                <span>{{ $cta->button_text ?? 'Book Appointment' }}</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
-            </button>
-            @endif
-        </div>
-        @else
-        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;">
-            <div>
-                <h3>Start Your Recovery Today</h3>
-                <p>Book your consultation — our team is ready 24x7 to help you.</p>
-            </div>
-            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
-                <span>Book Appointment</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
-            </button>
-        </div>
-        @endif
     </div>
 </section>
 

@@ -63,84 +63,27 @@
 </section>
 
 
-{{-- ===== ABOUT ===== --}}
-<section class="p2gh-section">
+{{-- ===== ABOUT + STATS (Merged — navy panel, image right) ===== --}}
+<section class="p2gh-section ddp-about-stats">
     <div class="container-p2gh">
-        <div class="about-grid">
+        <div class="ddp-panel">
 
-            <div class="about-images-wrap" data-aos="fade-right">
-                <div class="about-img-main">
-                    @if($aboutsection && $aboutsection->center_image)
-                        <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="Physiotherapy Clinic">
-                    @else
-                        <img src="{{ asset('front_assets/images/doctor.jpeg') }}" alt="Physiotherapy Clinic">
-                    @endif
-                </div>
-                <div class="about-img-small" data-aos="zoom-in" data-aos-delay="200">
-                    @if($aboutsection && $aboutsection->small_image)
-                        <img src="{{ asset('storage/'.$aboutsection->small_image) }}" alt="Therapist">
-                    @else
-                        <img src="{{ asset('front_assets/images/doctor-2.jpeg') }}" alt="Therapist">
-                    @endif
-                </div>
-                <div class="about-exp-badge" data-aos="zoom-in" data-aos-delay="300">
-                    @php
-                        $expCounter = $progressCounters->firstWhere('title', 'Years Experience') ?? $progressCounters->first();
-                    @endphp
-                    <span class="num">{{ $expCounter ? $expCounter->number.$expCounter->suffix : '20+' }}</span>
-                    <span class="label">Years of<br>Expertise</span>
-                </div>
-            </div>
-
-            <div data-aos="fade-left">
-                <div class="section-label">{{ $aboutsection->sub_title ?? 'Our Trusted Support' }}</div>
+            <div class="ddp-panel-content" data-aos="fade-right">
+                <div class="section-label">{{ $aboutsection->sub_title ?? 'About ' . (settings('company_short_name') ?? 'P2GH') }}</div>
                 <h2 class="main-heading">
                     @if($aboutsection && $aboutsection->title_line1)
                         {{ $aboutsection->title_line1 }} <span>{{ $aboutsection->title_line2 }}</span>
                     @else
-                        Passionate About <span>Providing Expert Care</span> And Healing
+                        Passionate About <span>Providing Expert Care</span> And Support
                     @endif
                 </h2>
-                <p class="section-desc" style="margin-bottom:28px;">
-                    {{ $aboutsection && $aboutsection->description ? $aboutsection->description : 'At '.( settings('company_name') ?? 'P2GH - 24*7 Physiotherapy').', our dedicated physiotherapists combine compassionate care, continuous support, and clinical expertise to relieve pain and help patients regain a better quality of life.' }}
+                <p class="section-desc" style="margin-bottom:20px;">
+                    {!! $aboutsection && $aboutsection->description ? nl2br(e($aboutsection->description)) : 'At <strong>'.( settings('company_name') ?? 'P2GH - 24*7 Physiotherapy').'</strong>, our dedicated physiotherapists combine compassionate care, continuous support, and clinical expertise to relieve pain and help patients regain a better quality of life.' !!}
                 </p>
-
-                <blockquote style="border-left:4px solid var(--primary);padding:14px 20px;background:var(--bg-section);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-style:italic;color:var(--text-body);margin-bottom:24px;font-size:15px;">
-                    "{{ $aboutsection->quote_text ?? "True healing comes from more than treatments — it's built on trust, patience, and compassion, reflected in each small victory." }}"
+                <blockquote style="border-left:4px solid var(--primary);padding:14px 20px;background:var(--bg-section);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-style:italic;color:var(--text-body);margin-bottom:28px;font-size:15px;">
+                    "{{ $aboutsection->quote_text ?? 'True healing comes from more than treatments — it is built on trust, patience, and compassion, reflected in each small victory.' }}"
                 </blockquote>
-
-                <div class="about-features" data-aos="fade-up" data-aos-delay="150">
-                    @php
-                        $aboutFeatures = collect($aboutsection->features ?? [])->filter(fn($f) => !empty($f['title']));
-                    @endphp
-                    @if($aboutFeatures->count())
-                        @foreach($aboutFeatures as $feature)
-                        <div class="about-feature-item">
-                            <div class="about-feature-icon"><i class="bi bi-{{ $feature['icon'] ?? 'check-circle' }}"></i></div>
-                            <div><h6>{{ $feature['title'] }}</h6><p>{{ $feature['description'] ?? '' }}</p></div>
-                        </div>
-                        @endforeach
-                    @else
-                    <div class="about-feature-item">
-                        <div class="about-feature-icon"><i class="bi bi-shield-check"></i></div>
-                        <div><h6>Certified Therapists</h6><p>BPT, MPT, COMT qualified professionals</p></div>
-                    </div>
-                    <div class="about-feature-item">
-                        <div class="about-feature-icon"><i class="bi bi-clock"></i></div>
-                        <div><h6>24×7 Availability</h6><p>Always here when you need us most</p></div>
-                    </div>
-                    <div class="about-feature-item">
-                        <div class="about-feature-icon"><i class="bi bi-heart-pulse"></i></div>
-                        <div><h6>Personalized Plans</h6><p>Treatment tailored to your condition</p></div>
-                    </div>
-                    <div class="about-feature-item">
-                        <div class="about-feature-icon"><i class="bi bi-cpu"></i></div>
-                        <div><h6>Modern Equipment</h6><p>Advanced tools for precise care</p></div>
-                    </div>
-                    @endif
-                </div>
-
-                <div class="doctor-signature" data-aos="fade-up" data-aos-delay="250">
+                <div class="doctor-signature">
                     @if($aboutsection && $aboutsection->logo_image)
                         <img src="{{ asset('storage/'.$aboutsection->logo_image) }}" alt="{{ settings('company_short_name') ?? 'P2GH' }}">
                     @else
@@ -150,9 +93,51 @@
                         <div class="doc-name">{{ $aboutsection->doctor_name ?? (settings('company_short_name') ?? 'Dr. Ankit Agrawal PT') }}</div>
                         <div class="doc-deg">{{ $aboutsection->doctor_qualification ?? 'BPT · MPT · COMT · CKT' }}</div>
                     </div>
-                    <a href="{{ $aboutsection && $aboutsection->button_link ? $aboutsection->button_link : url('/about-us') }}" class="btn-p2gh" style="margin-left:auto;padding:10px 20px;font-size:12px;">
+                    @if($aboutsection && $aboutsection->button_link)
+                    <a href="{{ $aboutsection->button_link }}" class="btn-p2gh" style="margin-left:auto;padding:10px 20px;font-size:12px;">
                         {{ $aboutsection->button_text ?? 'Know More' }} <span class="btn-icon">↗</span>
                     </a>
+                    @endif
+                </div>
+
+                @if($progressCounters && $progressCounters->count())
+                <div class="stats-grid">
+                    @foreach($progressCounters as $counter)
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                        <div class="stat-icon"><i class="bi {{ $counter->icon ?? 'bi-graph-up' }}"></i></div>
+                        <div class="stat-num">
+                            <span data-target="{{ $counter->number }}" data-suffix="{{ $counter->suffix ?? '+' }}">
+                                {{ $counter->number }}{{ $counter->suffix ?? '+' }}
+                            </span>
+                        </div>
+                        <div class="stat-label">{{ $counter->title }}</div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+            </div>
+
+            <div class="about-images-wrap" data-aos="fade-left">
+                <div class="about-img-main">
+                    @if($aboutsection && $aboutsection->center_image)
+                        <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'P2GH' }} Physiotherapy">
+                    @else
+                        <img src="{{ asset('front_assets/images/aa.jpeg') }}" alt="P2GH Physiotherapy">
+                    @endif
+                </div>
+                <div class="about-img-small">
+                    @if($aboutsection && $aboutsection->small_image)
+                        <img src="{{ asset('storage/'.$aboutsection->small_image) }}" alt="Therapy">
+                    @else
+                        <img src="{{ asset('front_assets/images/aaa.jpeg') }}" alt="Therapy">
+                    @endif
+                </div>
+                <div class="about-exp-badge">
+                    @php
+                        $expCounter = $progressCounters->firstWhere('title', 'Years Experience') ?? $progressCounters->first();
+                    @endphp
+                    <span class="num">{{ $expCounter ? $expCounter->number.$expCounter->suffix : '20+' }}</span>
+                    <span class="label">Years of<br>Expertise</span>
                 </div>
             </div>
 
@@ -161,24 +146,33 @@
 </section>
 
 
-{{-- ===== STATS BAND (Dynamic) ===== --}}
-@if($progressCounters && $progressCounters->count())
-<section class="stats-section" style="padding:0;">
-    <div class="stats-grid">
-        @foreach($progressCounters as $counter)
-        <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-            <div class="stat-icon"><i class="bi {{ $counter->icon ?? 'bi-graph-up' }}"></i></div>
-            <div class="stat-num">
-                <span data-target="{{ $counter->number }}" data-suffix="{{ $counter->suffix ?? '+' }}">
-                    {{ $counter->number }}{{ $counter->suffix ?? '+' }}
-                </span>
-            </div>
-            <div class="stat-label">{{ $counter->title }}</div>
+{{-- ===== MISSION / VISION (Dynamic from CTA section) ===== --}}
+<section class="p2gh-section">
+    <div class="container-p2gh">
+        <div style="text-align:center;max-width:560px;margin:0 auto 56px;" data-aos="fade-up">
+            <div class="section-label" style="justify-content:center;">Vision To Victory</div>
+            <h2 class="main-heading">A <span>Recognized Leader</span> In Quality Rehabilitation</h2>
         </div>
-        @endforeach
+
+        <div class="mv-grid">
+            <div class="mv-card" data-aos="fade-up">
+                <div class="mv-icon"><i class="bi bi-bullseye"></i></div>
+                <h4>Our Mission</h4>
+                <p>To deliver compassionate, expert physiotherapy care that relieves pain, restores mobility, and enhances quality of life for every patient — 24 hours a day, 7 days a week.</p>
+            </div>
+            <div class="mv-card" data-aos="fade-up" data-aos-delay="120">
+                <div class="mv-icon"><i class="bi bi-lightbulb"></i></div>
+                <h4>Our Vision</h4>
+                <p>To be the most trusted physiotherapy provider — helping patients regain mobility and confidence through modern, evidence-based care that is always accessible.</p>
+            </div>
+            <div class="mv-card" data-aos="fade-up" data-aos-delay="240">
+                <div class="mv-icon"><i class="bi bi-compass"></i></div>
+                <h4>Our Approach</h4>
+                <p>Personalized treatment plans focused on long-term healing, strength, and flexibility — addressing the root cause, not just the symptoms.</p>
+            </div>
+        </div>
     </div>
 </section>
-@endif
 
 
 {{-- ===== SERVICES ===== --}}
@@ -385,66 +379,6 @@
 @endif
 
 
-{{-- ===== MISSION / VISION (Dynamic from CTA section) ===== --}}
-<section class="p2gh-section">
-    <div class="container-p2gh">
-        <div style="text-align:center;max-width:560px;margin:0 auto 56px;" data-aos="fade-up">
-            <div class="section-label" style="justify-content:center;">Vision To Victory</div>
-            <h2 class="main-heading">A <span>Recognized Leader</span> In Quality Rehabilitation</h2>
-        </div>
-
-        <div class="mv-grid">
-            <div class="mv-card" data-aos="fade-up">
-                <div class="mv-icon"><i class="bi bi-bullseye"></i></div>
-                <h4>Our Mission</h4>
-                <p>To deliver compassionate, expert physiotherapy care that relieves pain, restores mobility, and enhances quality of life for every patient — 24 hours a day, 7 days a week.</p>
-            </div>
-            <div class="mv-card" data-aos="fade-up" data-aos-delay="120">
-                <div class="mv-icon"><i class="bi bi-lightbulb"></i></div>
-                <h4>Our Vision</h4>
-                <p>To be the most trusted physiotherapy provider — helping patients regain mobility and confidence through modern, evidence-based care that is always accessible.</p>
-            </div>
-            <div class="mv-card" data-aos="fade-up" data-aos-delay="240">
-                <div class="mv-icon"><i class="bi bi-compass"></i></div>
-                <h4>Our Approach</h4>
-                <p>Personalized treatment plans focused on long-term healing, strength, and flexibility — addressing the root cause, not just the symptoms.</p>
-            </div>
-        </div>
-
-        @if($cta)
-        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;{{ $cta->background_image ? 'background-image:url(\''.asset('storage/'.$cta->background_image).'\');background-size:cover;background-position:center;' : '' }}">
-            <div>
-                <h3>{{ $cta->heading ?? 'Ready To Start Your Recovery Journey?' }}</h3>
-                <p>{{ $cta->description ?? 'Book your consultation today — 24×7 appointments available.' }}</p>
-            </div>
-            @if(!empty($cta->button_link))
-            <a href="{{ $cta->button_link }}" class="btn-p2gh btn-p2gh-white" style="flex-shrink:0;">
-                <span>{{ $cta->button_text ?? 'Book Now' }}</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
-            </a>
-            @else
-            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
-                <span>{{ $cta->button_text ?? 'Book Now' }}</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
-            </button>
-            @endif
-        </div>
-        @else
-        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;">
-            <div>
-                <h3>Ready To Start Your Recovery Journey?</h3>
-                <p>Book your initial consultation today — 24×7 appointments available.</p>
-            </div>
-            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
-                <span>Book Now</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
-            </button>
-        </div>
-        @endif
-    </div>
-</section>
-
-
 {{-- ===== BLOGS (Dynamic) ===== --}}
 @if($blogs && $blogs->count())
 <section class="p2gh-section">
@@ -483,6 +417,36 @@
             </div>
             @endforeach
         </div>
+         @if($cta)
+        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;{{ $cta->background_image ? 'background-image:url(\''.asset('storage/'.$cta->background_image).'\');background-size:cover;background-position:center;' : '' }}">
+            <div>
+                <h3>{{ $cta->heading ?? 'Ready To Start Your Recovery Journey?' }}</h3>
+                <p>{{ $cta->description ?? 'Book your consultation today — 24×7 appointments available.' }}</p>
+            </div>
+            @if(!empty($cta->button_link))
+            <a href="{{ $cta->button_link }}" class="btn-p2gh btn-p2gh-white" style="flex-shrink:0;">
+                <span>{{ $cta->button_text ?? 'Book Now' }}</span>
+                <span class="btn-icon" style="color:var(--primary);">↗</span>
+            </a>
+            @else
+            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
+                <span>{{ $cta->button_text ?? 'Book Now' }}</span>
+                <span class="btn-icon" style="color:var(--primary);">↗</span>
+            </button>
+            @endif
+        </div>
+        @else
+        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;">
+            <div>
+                <h3>Ready To Start Your Recovery Journey?</h3>
+                <p>Book your initial consultation today — 24×7 appointments available.</p>
+            </div>
+            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
+                <span>Book Now</span>
+                <span class="btn-icon" style="color:var(--primary);">↗</span>
+            </button>
+        </div>
+        @endif
     </div>
 </section>
 @endif

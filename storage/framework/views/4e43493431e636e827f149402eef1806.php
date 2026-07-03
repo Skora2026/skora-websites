@@ -1,13 +1,12 @@
-@extends('layouts.frontend')
-@section('title', 'Contact Us — P2GH 24*7 Physiotherapy')
+<?php $__env->startSection('title', 'Contact Us — P2GH 24*7 Physiotherapy'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="page-hero">
     <div class="container-p2gh" style="position:relative;z-index:1;">
         <div class="breadcrumb-title" data-aos="fade-down">Contact Us</div>
         <nav class="breadcrumb-nav" data-aos="fade-up">
-            <a href="{{ url('/') }}">Home</a>
+            <a href="<?php echo e(url('/')); ?>">Home</a>
             <span class="sep">/</span>
             <span style="color:rgba(255,255,255,0.7);">Contact Us</span>
         </nav>
@@ -22,37 +21,37 @@
                 <h3>Get In Touch</h3>
                 <p>We are available 24x7 — call, WhatsApp, or visit us anytime.</p>
 
-                @if(!empty(settings('company_address2')))
+                <?php if(!empty(settings('company_address2'))): ?>
                 <div class="contact-info-item">
                     <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
                     <div>
                         <h6>Our Location</h6>
-                        <p>{{ settings('company_address2') }}</p>
+                        <p><?php echo e(settings('company_address2')); ?></p>
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                @if(!empty(settings('company_mobile1')))
+                <?php if(!empty(settings('company_mobile1'))): ?>
                 <div class="contact-info-item">
                     <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
                     <div>
                         <h6>Phone Number</h6>
-                        <a href="tel:{{ settings('company_mobile1') }}">{{ settings('company_mobile1') }}</a><br>
-                        <a href="tel:{{ settings('company_mobile2') }}">{{ settings('company_mobile2') }}</a>
+                        <a href="tel:<?php echo e(settings('company_mobile1')); ?>"><?php echo e(settings('company_mobile1')); ?></a><br>
+                        <a href="tel:<?php echo e(settings('company_mobile2')); ?>"><?php echo e(settings('company_mobile2')); ?></a>
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                @if(!empty(settings('company_email1')))
+                <?php if(!empty(settings('company_email1'))): ?>
                 <div class="contact-info-item">
                     <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
                     <div>
                         <h6>Email Address</h6>
-                        <a href="mailto:{{ settings('company_email1') }}">{{ settings('company_email1') }}</a><br>
-                        <a href="mailto:{{ settings('company_email2') }}">{{ settings('company_email2') }}</a>
+                        <a href="mailto:<?php echo e(settings('company_email1')); ?>"><?php echo e(settings('company_email1')); ?></a><br>
+                        <a href="mailto:<?php echo e(settings('company_email2')); ?>"><?php echo e(settings('company_email2')); ?></a>
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
                 <div class="contact-info-item">
                     <div class="contact-info-icon"><i class="bi bi-clock-fill"></i></div>
@@ -69,14 +68,15 @@
                 <h2 class="main-heading" style="font-size:1.8rem;">We Would Love <span>To Hear From You</span></h2>
                 <p class="section-desc" style="margin-bottom:28px;">Fill in the form below and we will get back to you within a few hours.</p>
 
-                @if(session('success'))
+                <?php if(session('success')): ?>
                 <div style="background:rgba(26,122,138,0.1);border:1px solid var(--primary);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:20px;color:var(--primary);font-size:14px;font-weight:600;">
-                    {{ session('success') }}
-                </div>
-                @endif
+                    <?php echo e(session('success')); ?>
 
-                <form action="{{ route('contact.store') }}" method="POST">
-                    @csrf
+                </div>
+                <?php endif; ?>
+
+                <form action="<?php echo e(route('contact.store')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
                         <div class="form-group" style="margin-bottom:0;">
                             <label class="form-label">Full Name *</label>
@@ -108,18 +108,19 @@
 
         </div>
 
-        @if(!empty(settings('map')))
+        <?php if(!empty(settings('map'))): ?>
         <div class="contact-map-wrap" data-aos="fade-up">
-            @php
+            <?php
                 $mapValue = trim(settings('map'));
-            @endphp
-            @if(stripos($mapValue, '<iframe') !== false)
-                {{-- Admin saved a full <iframe> tag — use as-is --}}
-                {!! $mapValue !!}
-            @else
-                {{-- Admin saved only the embed URL — wrap it in an iframe --}}
+            ?>
+            <?php if(stripos($mapValue, '<iframe') !== false): ?>
+                
+                <?php echo $mapValue; ?>
+
+            <?php else: ?>
+                
                 <iframe
-                    src="{{ $mapValue }}"
+                    src="<?php echo e($mapValue); ?>"
                     width="100%"
                     height="100%"
                     style="border:0;"
@@ -127,11 +128,12 @@
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
-            @endif
+            <?php endif; ?>
         </div>
-        @endif
+        <?php endif; ?>
 
     </div>
 </section>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.frontend', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\dr_deepak_pal\resources\views/front/contact.blade.php ENDPATH**/ ?>
