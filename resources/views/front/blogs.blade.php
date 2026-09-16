@@ -1,33 +1,34 @@
 @extends('layouts.frontend')
-@section('title', 'Health Blogs — ' . (settings('company_name') ?? 'Website'))
+@section('title', 'Health Blogs - ' . (settings('company_name') ?? 'Website'))
 
 @section('content')
 
-<div class="page-hero">
-    <div class="container-p2gh" style="position:relative;z-index:1;">
+<div class="page-hero page-hero--img">
+    <div class="page-hero-bg" style="background-image: url('{{ asset('front_assets/images/hero-blogs.jpg') }}');"></div>
+    <div class="container-p2gh">
         <div class="breadcrumb-title" data-aos="fade-down">Health Blogs</div>
         <nav class="breadcrumb-nav" data-aos="fade-up">
             <a href="{{ url('/') }}">Home</a>
             <span class="sep">/</span>
-            <span style="color:rgba(255,255,255,0.7);">Blogs</span>
+            <span>Blogs</span>
         </nav>
     </div>
 </div>
 
 <section class="p2gh-section">
     <div class="container-p2gh">
-        <div style="text-align:center;max-width:560px;margin:0 auto 56px;" data-aos="fade-up">
-            <div class="section-label" style="justify-content:center;">News and Insights</div>
-            <h2 class="main-heading">Expert <span>Health Tips</span> And Guides</h2>
-            <p class="section-desc">Stay informed with the latest physiotherapy insights, recovery tips, and health advice from our expert team.</p>
+        <div class="section-header-center" data-aos="fade-up">
+            <div class="section-label">Health Resources</div>
+            <h2 class="main-heading">Expert <span>Neurology &amp; Rehabilitation</span> Insights</h2>
+            <p class="section-desc">Stay informed with expert articles, neurological health tips, rehabilitation guidance, and recovery advice from our specialists.</p>
         </div>
 
         <div class="blog-grid">
             @forelse($blogs as $blog)
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 80 }}">
                 <a href="{{ url('/blog-details/' . $blog->slug) }}">
                     <div class="blog-card-img">
-                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
+                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" loading="lazy">
                     </div>
                     <div class="blog-card-body">
                         <div class="blog-meta">
@@ -40,15 +41,15 @@
                 </a>
             </div>
             @empty
-            <div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--text-muted);">
-                <i class="bi bi-journal-text" style="font-size:48px;color:var(--border-mid);display:block;margin-bottom:16px;"></i>
+            <div class="empty-state">
+                <i class="bi bi-journal-text"></i>
                 <p>No blog posts found. Check back soon for health tips and updates!</p>
             </div>
             @endforelse
         </div>
 
         @if(method_exists($blogs, 'links'))
-        <div style="margin-top:48px;display:flex;justify-content:center;">
+        <div style="margin-top:52px;display:flex;justify-content:center;">
             {{ $blogs->links() }}
         </div>
         @endif

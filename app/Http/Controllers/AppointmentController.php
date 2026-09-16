@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appointment; // Assume Appointment model exists with fields: id, name, email, phone, service, message, status, timestamps
+use App\Models\CompanySetting;
 
 class AppointmentController extends Controller
 {
@@ -34,7 +35,18 @@ class AppointmentController extends Controller
         $validated['message'] = strip_tags($validated['message']);
         
         $appointment = Appointment::create($validated);
-        
+
+        // Direct WhatsApp redirect
+        $waNumber = CompanySetting::getValue('company_whatsapp1');
+        if ($waNumber) {
+            $waNumber = preg_replace('/[^0-9]/', '', $waNumber);
+            $msg = "Hi, my name is {$validated['name']}. I would like to book an appointment.\n"
+                 . "Phone: {$validated['phone']}\n"
+                 . "Service: {$validated['service']}\n"
+                 . "Message: " . ($validated['message'] ?? '-');
+            return redirect()->away("https://wa.me/{$waNumber}?text=" . urlencode($msg));
+        }
+
         // Optional: Send email notification
         // Mail::to('admin@example.com')->send(new AppointmentNotification($appointment));
         return redirect()->back()->with('success', 'Appointment submitted successfully');    

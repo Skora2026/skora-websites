@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2GH || Reset Password</title>
-    <meta name="description" content="Reset your P2GH account password securely." />
+    <title>Navodayan || Reset Password</title>
+    <meta name="description" content="Reset your Navodayan account password securely." />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('front_assets/css/login-register.css') }}" />
@@ -26,13 +26,13 @@
                 <a href="{{url('/')}}">
                 <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) 
                             : asset('assets-front/img-main.png') }}" 
-                     alt="{{ settings('company_short_name') ?? 'P2GH' }}"
+                     alt="{{ settings('company_short_name') ?? 'Navodayan' }}"
                      width="55"
                      height="55"
                      loading="lazy"
                      onerror="this.src='{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('assets-front/img-main.png') }}'">
                 </a>
-                <span class="menu-text">{{ settings('company_short_name') ?? 'P2GH ' }}</span>
+                <span class="menu-text">{{ settings('company_short_name') ?? 'Navodayan ' }}</span>
             </h1>
             <h2 class="register-title">Reset Password</h2>
             <p class="register-subtitle">Create a new password for your account</p>

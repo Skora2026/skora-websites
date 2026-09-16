@@ -17,9 +17,13 @@ class CompanySetting extends Model
         'company_whatsapp1', 'company_whatsapp2',
         'facebook', 'twitter', 'linkedin', 'instagram', 'pintrest', 'map',
         'company_address1', 'company_address2',
-        'currency_name', 'currency_symbol'
+        'currency_name', 'currency_symbol',
+        'working_hours', 'office_timings'
     ];
 
+    protected $casts = [
+        'office_timings' => 'array',
+    ];
 
     public static function getValue($key, $default = null)
     {
@@ -32,6 +36,5 @@ class CompanySetting extends Model
     {
         return static::first(); // Full object
     }
-
 
 }

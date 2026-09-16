@@ -10,10 +10,10 @@
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
-        <div data-aos="fade-up">
+        <div class="reveal">
             <div class="hero-badge">
                 <span class="dot"></span>
-                {{ $hero?->badge_text ?? ((settings('company_short_name') ?? 'P2GH') . ' — 24×7 Physiotherapy') }}
+                {{ $hero?->badge_text ?? settings('company_tagline') ?? 'Navodayan Neuroclinic & Neurorehab' }}
             </div>
 
             <h1 class="hero-title">
@@ -21,16 +21,16 @@
                 <span class="line2">{{ $hero && $hero->subheading ? $hero->subheading : 'Live Without Limits.' }}</span>
             </h1>
 
-            <p class="hero-desc" data-aos="fade-up" data-aos-delay="100">
+            <p class="hero-desc reveal" style="--reveal-delay:120ms;">
                 {{ $hero && $hero->description ? $hero->description : 'Expert physiotherapy care available round the clock. Our certified therapists help you recover faster, move better, and live pain-free — every single day.' }}
             </p>
 
-            <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
-                <button class="btn-p2gh btn-p2gh-accent openForm" style="font-size:15px;padding:15px 36px;">
+            <div class="hero-actions reveal" style="--reveal-delay:220ms;">
+                <button class="btn-p2gh btn-p2gh-accent openForm">
                     <span>{{ $hero?->btn_text ?? 'Book Appointment' }}</span>
                     <span class="btn-icon">↗</span>
                 </button>
-                <a href="{{ url('/services') }}" class="btn-p2gh-outline" style="color:#fff;border-color:rgba(255,255,255,0.5);font-size:15px;padding:14px 32px;">
+                <a href="{{ url('/services') }}" class="btn-p2gh btn-p2gh-outline">
                     {{ $hero?->btn2_text ?? 'Explore Services' }}
                 </a>
             </div>
@@ -38,7 +38,7 @@
 
         {{-- Dynamic Stats from progress_counters --}}
         @if($progressCounters && $progressCounters->count())
-        <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
+        <div class="hero-stats reveal" style="--reveal-delay:340ms;">
             @foreach($progressCounters as $counter)
             <div class="hero-stat-item">
                 <div class="hero-stat-num">
@@ -53,22 +53,22 @@
         @endif
     </div>
 
-    <div class="hero-float-card" data-aos="fade-left" data-aos-delay="500">
+    <div class="hero-float-card reveal reveal-right" style="--reveal-delay:500ms;">
         <div class="hero-float-icon"><i class="bi bi-heart-pulse-fill"></i></div>
         <div class="hero-float-text">
             <strong>{{ $hero?->floating_title ?? 'Expert Therapists' }}</strong>
-            <span>{{ $hero?->floating_subtitle ?? 'BPT · MPT · COMT certified' }}</span>
+            <span>{{ $hero?->floating_subtitle ?? 'Expert Neuro Rehabilitation Team' }}</span>
         </div>
     </div>
 </section>
 
 
-{{-- ===== ABOUT + STATS (Merged — navy panel, image right) ===== --}}
-<section class="p2gh-section ddp-about-stats">
+{{-- ===== ABOUT + STATS (Editorial navy panel, layered imagery) ===== --}}
+<section class="p2gh-section">
     <div class="container-p2gh">
         <div class="ddp-panel">
 
-            <div class="ddp-panel-content" data-aos="fade-right">
+            <div class="ddp-panel-content reveal reveal-left">
                 <div class="section-label">{{ $aboutsection->sub_title ?? 'About ' . (settings('company_short_name') ?? 'P2GH') }}</div>
                 <h2 class="main-heading">
                     @if($aboutsection && $aboutsection->title_line1)
@@ -77,12 +77,14 @@
                         Passionate About <span>Providing Expert Care</span> And Support
                     @endif
                 </h2>
-                <p class="section-desc" style="margin-bottom:20px;">
-                    {!! $aboutsection && $aboutsection->description ? nl2br(e($aboutsection->description)) : 'At <strong>'.( settings('company_name') ?? 'P2GH - 24*7 Physiotherapy').'</strong>, our dedicated physiotherapists combine compassionate care, continuous support, and clinical expertise to relieve pain and help patients regain a better quality of life.' !!}
+                <p class="section-desc" style="margin-bottom:6px;">
+                    {!! $aboutsection && $aboutsection->description ? nl2br(e($aboutsection->description)) : 'At <strong>'.( settings('company_name') ?? 'Navodayan Neuroclinic & Neurorehab').'</strong>, our dedicated physiotherapists combine compassionate care, continuous support, and clinical expertise to relieve pain and help patients regain a better quality of life.' !!}
                 </p>
-                <blockquote style="border-left:4px solid var(--primary);padding:14px 20px;background:var(--bg-section);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-style:italic;color:var(--text-body);margin-bottom:28px;font-size:15px;">
+
+                <blockquote class="ddp-about-quote">
                     "{{ $aboutsection->quote_text ?? 'True healing comes from more than treatments — it is built on trust, patience, and compassion, reflected in each small victory.' }}"
                 </blockquote>
+
                 <div class="doctor-signature">
                     @if($aboutsection && $aboutsection->logo_image)
                         <img src="{{ asset('storage/'.$aboutsection->logo_image) }}" alt="{{ settings('company_short_name') ?? 'P2GH' }}">
@@ -90,11 +92,11 @@
                         <img src="{{ asset('front_assets/images/doc-icon.jpg') }}" alt="Doctor">
                     @endif
                     <div>
-                        <div class="doc-name">{{ $aboutsection->doctor_name ?? (settings('company_short_name') ?? 'Dr. Ankit Agrawal PT') }}</div>
-                        <div class="doc-deg">{{ $aboutsection->doctor_qualification ?? 'BPT · MPT · COMT · CKT' }}</div>
+                        <div class="doc-name">{{ $aboutsection->doctor_name ?? (settings('company_short_name') ?? 'Dr. Rajpal') }}</div>
+                        <div class="doc-deg">{{ $aboutsection->doctor_qualification ?? 'Neuro Consultant · Neuro Rehabilitation' }}</div>
                     </div>
                     @if($aboutsection && $aboutsection->button_link)
-                    <a href="{{ $aboutsection->button_link }}" class="btn-p2gh" style="margin-left:auto;padding:10px 20px;font-size:12px;">
+                    <a href="{{ $aboutsection->button_link }}" class="btn-p2gh">
                         {{ $aboutsection->button_text ?? 'Know More' }} <span class="btn-icon">↗</span>
                     </a>
                     @endif
@@ -103,7 +105,7 @@
                 @if($progressCounters && $progressCounters->count())
                 <div class="stats-grid">
                     @foreach($progressCounters as $counter)
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="stat-item">
                         <div class="stat-icon"><i class="bi {{ $counter->icon ?? 'bi-graph-up' }}"></i></div>
                         <div class="stat-num">
                             <span data-target="{{ $counter->number }}" data-suffix="{{ $counter->suffix ?? '+' }}">
@@ -117,12 +119,12 @@
                 @endif
             </div>
 
-            <div class="about-images-wrap" data-aos="fade-left">
+            <div class="about-images-wrap reveal-img reveal" style="--reveal-delay:150ms;">
                 <div class="about-img-main">
                     @if($aboutsection && $aboutsection->center_image)
                         <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'P2GH' }} Physiotherapy">
                     @else
-                        <img src="{{ asset('front_assets/images/aa.jpeg') }}" alt="P2GH Physiotherapy">
+                        <img src="{{ asset('front_assets/images/aa.jpeg') }}" alt="Navodayan Neuroclinic & Neurorehab">
                     @endif
                 </div>
                 <div class="about-img-small">
@@ -146,26 +148,26 @@
 </section>
 
 
-{{-- ===== MISSION / VISION (Dynamic from CTA section) ===== --}}
-<section class="p2gh-section">
+{{-- ===== MISSION / VISION (Dynamic from CTA section context — content unchanged) ===== --}}
+<section class="p2gh-section bg-light">
     <div class="container-p2gh">
-        <div style="text-align:center;max-width:560px;margin:0 auto 56px;" data-aos="fade-up">
-            <div class="section-label" style="justify-content:center;">Vision To Victory</div>
+        <div class="section-header-center" data-aos="fade-up">
+            <div class="section-label">Vision To Victory</div>
             <h2 class="main-heading">A <span>Recognized Leader</span> In Quality Rehabilitation</h2>
         </div>
 
-        <div class="mv-grid">
-            <div class="mv-card" data-aos="fade-up">
+        <div class="mv-grid" data-aos="fade-up" data-aos-delay="100">
+            <div class="mv-card">
                 <div class="mv-icon"><i class="bi bi-bullseye"></i></div>
                 <h4>Our Mission</h4>
                 <p>To deliver compassionate, expert physiotherapy care that relieves pain, restores mobility, and enhances quality of life for every patient — 24 hours a day, 7 days a week.</p>
             </div>
-            <div class="mv-card" data-aos="fade-up" data-aos-delay="120">
+            <div class="mv-card">
                 <div class="mv-icon"><i class="bi bi-lightbulb"></i></div>
                 <h4>Our Vision</h4>
                 <p>To be the most trusted physiotherapy provider — helping patients regain mobility and confidence through modern, evidence-based care that is always accessible.</p>
             </div>
-            <div class="mv-card" data-aos="fade-up" data-aos-delay="240">
+            <div class="mv-card">
                 <div class="mv-icon"><i class="bi bi-compass"></i></div>
                 <h4>Our Approach</h4>
                 <p>Personalized treatment plans focused on long-term healing, strength, and flexibility — addressing the root cause, not just the symptoms.</p>
@@ -177,7 +179,7 @@
 
 {{-- ===== SERVICES ===== --}}
 @if($indexservices && $indexservices->count())
-<section class="p2gh-section bg-light">
+<section class="p2gh-section">
     <div class="container-p2gh">
         <div class="section-header-flex">
             <div class="section-header-left">
@@ -196,13 +198,14 @@
 
         <div class="services-grid">
             @foreach($indexservices as $service)
-            <div class="service-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 90 }}">
                 <a href="{{ route('service.detail', $service->slug) }}">
                     <div class="service-card-img">
+                        <span class="service-card-num">{{ str_pad($loop->index + 1, 2, '0', STR_PAD_LEFT) }}</span>
                         @if($service->image)
-                            <img src="{{ asset('storage/'.$service->image) }}" alt="{{ $service->name }}">
+                            <img src="{{ asset('storage/'.$service->image) }}" alt="{{ $service->name }}" loading="lazy">
                         @else
-                            <img src="{{ asset('front_assets/images/serv1.webp') }}" alt="{{ $service->name }}">
+                            <img src="{{ asset('front_assets/images/serv1.webp') }}" alt="{{ $service->name }}" loading="lazy">
                         @endif
                     </div>
                     <div class="service-card-body">
@@ -221,26 +224,26 @@
 
 {{-- ===== WHY US (Dynamic) ===== --}}
 @php $why = $whyChooseUsSections->first(); @endphp
-<section class="p2gh-section">
+<section class="p2gh-section bg-light">
     <div class="container-p2gh">
         <div class="why-grid">
 
-            <div class="why-img-wrap" data-aos="fade-right">
+            <div class="why-img-wrap reveal reveal-left">
                 <div class="why-img-main">
                     @if($why && $why->right_image)
                         <img src="{{ asset('storage/'.$why->right_image) }}" alt="Why Choose {{ settings('company_short_name') ?? 'P2GH' }}">
                     @else
-                        <img src="{{ asset('front_assets/images/doctor.png') }}" alt="Why Choose P2GH">
+                        <img src="{{ asset('front_assets/images/doctor.png') }}" alt="Why Choose Navodayan">
                     @endif
                 </div>
                 @php $satisfactionCounter = $progressCounters->where('title', 'Success Rate')->first() ?? $progressCounters->last(); @endphp
-                <div class="why-accent-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="why-accent-card reveal reveal-zoom" style="--reveal-delay:300ms;">
                     <span class="big-num">{{ $satisfactionCounter ? $satisfactionCounter->number.$satisfactionCounter->suffix : '98%' }}</span>
                     <span class="label">Patient<br>Satisfaction</span>
                 </div>
             </div>
 
-            <div data-aos="fade-left">
+            <div class="reveal reveal-right">
                 <div class="section-label">{{ $why->sub_title ?? 'Why Choose Us' }}</div>
                 <h2 class="main-heading">
                     @if($why && $why->main_title)
@@ -283,7 +286,7 @@
                         </div>
                         <div class="why-item" data-aos="fade-up" data-aos-delay="240">
                             <div class="why-item-icon accent"><i class="bi bi-clock"></i></div>
-                            <div class="why-item-body"><h5>24×7 Availability</h5><p>We're here whenever you need us — day or night, on call for your recovery.</p></div>
+                            <div class="why-item-body"><h5>Convenient Timings</h5><p>Morning to evening physiotherapy hours, with specialist consultations by appointment.</p></div>
                         </div>
                         @endif
                     @else
@@ -301,7 +304,7 @@
                     </div>
                     <div class="why-item" data-aos="fade-up" data-aos-delay="240">
                         <div class="why-item-icon accent"><i class="bi bi-clock"></i></div>
-                        <div class="why-item-body"><h5>24×7 Availability</h5><p>We're here whenever you need us — day or night, on call for your recovery.</p></div>
+                        <div class="why-item-body"><h5>Convenient Timings</h5><p>Morning to evening physiotherapy hours, with specialist consultations by appointment.</p></div>
                     </div>
                     @endif
                 </div>
@@ -312,12 +315,12 @@
 </section>
 
 
-{{-- ===== PROCESS STEPS (Dynamic) ===== --}}
+{{-- ===== PROCESS STEPS (Dynamic — visual journey) ===== --}}
 @if($processSteps && $processSteps->count())
-<section class="p2gh-section bg-section">
+<section class="p2gh-section">
     <div class="container-p2gh">
-        <div style="text-align:center;max-width:600px;margin:0 auto 64px;" data-aos="fade-up">
-            <div class="section-label" style="justify-content:center;">How It Works</div>
+        <div class="section-header-center" data-aos="fade-up">
+            <div class="section-label">How It Works</div>
             <h2 class="main-heading">
                 {{ $processSteps->count() }} Simple Steps To <span>Begin Your Recovery</span>
             </h2>
@@ -327,7 +330,7 @@
         @php $psCols = min($processSteps->count(), 3); @endphp
         <div class="process-steps" data-steps="{{ $psCols }}" style="grid-template-columns: repeat({{ $psCols }}, 1fr); --ps-cols: {{ $psCols }};">
             @foreach($processSteps as $step)
-            <div class="process-step" data-aos="fade-up" data-aos-delay="{{ $loop->index * 150 }}">
+            <div class="process-step reveal" style="--reveal-delay: {{ $loop->index * 140 }}ms;">
                 <div class="step-num-wrap">
                     <div class="step-circle-outer">
                         <div class="step-inner-circle">{{ $step->step_number }}</div>
@@ -348,8 +351,8 @@
 @if($testimonials && $testimonials->count())
 <section class="p2gh-section bg-light">
     <div class="container-p2gh">
-        <div style="text-align:center;max-width:580px;margin:0 auto 56px;" data-aos="fade-up">
-            <div class="section-label" style="justify-content:center;">Patient Reviews</div>
+        <div class="section-header-center" data-aos="fade-up">
+            <div class="section-label">Patient Reviews</div>
             <h2 class="main-heading">What Our <span>Patients</span> Say</h2>
             <p class="section-desc">Real recovery stories from real patients. Hear how {{ settings('company_short_name') ?? 'P2GH' }} has helped people get back to living fully.</p>
         </div>
@@ -362,7 +365,11 @@
                         <div class="testimonial-stars">{{ str_repeat('★', (int)$t->rating) }}</div>
                         <p class="testimonial-text">"{{ $t->message }}"</p>
                         <div class="testimonial-client">
-                            <img src="{{ $t->client_image ? asset('storage/'.$t->client_image) : asset('front_assets/images/avtar-2.jpg') }}" alt="{{ $t->client_name }}">
+                            @if($t->client_image)
+                                <img src="{{ asset('storage/'.$t->client_image) }}" alt="{{ $t->client_name }}" loading="lazy">
+                            @else
+                                <span class="testimonial-avatar-initials">{{ mb_strtoupper(mb_substr(trim($t->client_name), 0, 1)) }}</span>
+                            @endif
                             <div>
                                 <div class="client-name">{{ $t->client_name }}</div>
                                 <div class="client-role">Verified Patient</div>
@@ -372,14 +379,14 @@
                 </div>
                 @endforeach
             </div>
-            <div class="swiper-pagination" style="margin-top:32px;position:relative;"></div>
+            <div class="swiper-pagination"></div>
         </div>
     </div>
 </section>
 @endif
 
 
-{{-- ===== BLOGS (Dynamic) ===== --}}
+{{-- ===== BLOGS (Dynamic — featured editorial grid) ===== --}}
 @if($blogs && $blogs->count())
 <section class="p2gh-section">
     <div class="container-p2gh">
@@ -398,12 +405,12 @@
             </a>
         </div>
 
-        <div class="blog-grid">
+        <div class="blog-grid has-featured">
             @foreach($blogs as $blog)
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 90 }}">
                 <a href="{{ url('/blog-details/'.$blog->slug) }}">
                     <div class="blog-card-img">
-                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
+                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" loading="lazy">
                     </div>
                     <div class="blog-card-body">
                         <div class="blog-meta">
@@ -417,33 +424,33 @@
             </div>
             @endforeach
         </div>
-         @if($cta)
-        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;{{ $cta->background_image ? 'background-image:url(\''.asset('storage/'.$cta->background_image).'\');background-size:cover;background-position:center;' : '' }}">
+
+        @if($cta)
+        <div class="cta-banner" data-aos="fade-up" style="{{ $cta->background_image ? 'background-image:url(\''.asset('storage/'.$cta->background_image).'\');background-size:cover;background-position:center;' : '' }}">
             <div>
-                <h3>{{ $cta->heading ?? 'Ready To Start Your Recovery Journey?' }}</h3>
-                <p>{{ $cta->description ?? 'Book your consultation today — 24×7 appointments available.' }}</p>
+                <h3>{{ $cta->heading ?? 'Ready To Start Your Recovery Journey?' }}</h3>                            <p>{{ $cta->description ?? 'Book your consultation today — we\'re here to help you recover.' }}</p>
             </div>
-            @if(!empty($cta->button_link))
-            <a href="{{ $cta->button_link }}" class="btn-p2gh btn-p2gh-white" style="flex-shrink:0;">
+            @if(!empty($cta->button_link) && trim($cta->button_link) !== '#')
+            <a href="{{ $cta->button_link }}" class="btn-p2gh btn-p2gh-white">
                 <span>{{ $cta->button_text ?? 'Book Now' }}</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
+                <span class="btn-icon">↗</span>
             </a>
             @else
-            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
+            <button class="btn-p2gh btn-p2gh-white openForm">
                 <span>{{ $cta->button_text ?? 'Book Now' }}</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
+                <span class="btn-icon">↗</span>
             </button>
             @endif
         </div>
         @else
-        <div class="cta-banner" data-aos="zoom-in" style="margin-top:40px;">
+        <div class="cta-banner" data-aos="fade-up">
             <div>
                 <h3>Ready To Start Your Recovery Journey?</h3>
-                <p>Book your initial consultation today — 24×7 appointments available.</p>
+                <p>Book your initial consultation today — we're here to help you recover.</p>
             </div>
-            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
+            <button class="btn-p2gh btn-p2gh-white openForm">
                 <span>Book Now</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
+                <span class="btn-icon">↗</span>
             </button>
         </div>
         @endif

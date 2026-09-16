@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2GH || Register</title>
-    <meta name="description" content="Create your P2GH account and join our community." />
+    <title>Navodayan || Register</title>
+    <meta name="description" content="Create your Navodayan account and join our community." />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('front_assets/css/login-register.css') }}" />
@@ -18,8 +18,8 @@
             <h1 class="register-logo">
                  <a href="{{url('/')}}">
                 <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) 
-                            : asset('assets-front/img-main.png') }}" alt="{{ settings('company_short_name') ?? 'P2GH' }}" height="55" alt="{{ settings('company_short_name') ?? 'P2GH' }}">
-               {{ settings('company_short_name') ?? 'P2GH ' }}
+                            : asset('assets-front/img-main.png') }}" alt="{{ settings('company_short_name') ?? 'Navodayan' }}" height="55" alt="{{ settings('company_short_name') ?? 'Navodayan' }}">
+               {{ settings('company_short_name') ?? 'Navodayan ' }}
                 </a>
             </h1>
             <h2 class="register-title">Create Account</h2>

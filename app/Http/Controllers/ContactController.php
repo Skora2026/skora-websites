@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Contact;
+use App\Models\CompanySetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -48,6 +49,17 @@ class ContactController extends Controller
         ]);
 
         Contact::create(array_merge($request->all(), ['status' => 'pending'])); 
+
+        // Direct WhatsApp redirect
+        $waNumber = CompanySetting::getValue('company_whatsapp1');
+        if ($waNumber) {
+            $waNumber = preg_replace('/[^0-9]/', '', $waNumber); // sirf digits rakho
+            $msg = "Hi, I am {$request->name}.\n"
+                 . "Phone: {$request->phone}\n"
+                 . "Subject: " . ($request->subject ?? '-') . "\n"
+                 . "Message: {$request->message}";
+            return redirect()->away("https://wa.me/{$waNumber}?text=" . urlencode($msg));
+        }
 
         return redirect()->route('contact-us')
             ->with('success', 'Contact message sent successfully!');

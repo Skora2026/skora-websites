@@ -1,44 +1,44 @@
 @extends('layouts.frontend')
-@section('title', 'Our Services — ' . (settings('company_name') ?? 'Website'))
+@section('title', 'Our Services - ' . (settings('company_name') ?? 'Website'))
 
 @section('content')
 
-<div class="page-hero">
-    <div class="container-p2gh" style="position:relative;z-index:1;">
+<div class="page-hero page-hero--img">
+    <div class="page-hero-bg" style="background-image: url('{{ asset('front_assets/images/hero-services.jpg') }}');"></div>
+    <div class="container-p2gh">
         <div class="breadcrumb-title" data-aos="fade-down">Our Services</div>
         <nav class="breadcrumb-nav" data-aos="fade-up">
             <a href="{{ url('/') }}">Home</a>
             <span class="sep">/</span>
-            <span style="color:rgba(255,255,255,0.7);">Services</span>
+            <span>Services</span>
         </nav>
     </div>
 </div>
 
 <section class="p2gh-section">
     <div class="container-p2gh">
-        <div style="text-align:center;max-width:600px;margin:0 auto 56px;" data-aos="fade-up">
-            <div class="section-label" style="justify-content:center;">What We Offer</div>
-            <h2 class="main-heading">Comprehensive <span>Physiotherapy</span> Services</h2>
+        <div class="section-header-center" data-aos="fade-up">
+            <div class="section-label">Our Services</div>
+            <h2 class="main-heading">Comprehensive <span>Neurology &amp; Rehabilitation</span> Services</h2>
             <p class="section-desc">
-                From sports injuries to post-surgical recovery, we provide evidence-based physiotherapy treatments tailored to your specific needs.
+                We provide expert neurological consultation, advanced diagnostics, and personalized rehabilitation programs to help patients regain independence and improve their quality of life.
             </p>
         </div>
 
         @if(isset($categories) && $categories->count())
             @foreach($categories as $category)
             <div class="service-category-block">
-                <h3 class="service-category-title">
-                    {{ $category->name }}
-                </h3>
+                <h3 class="service-category-title">{{ $category->name }}</h3>
                 <div class="services-list-grid">
                     @foreach($category->services as $service)
-                    <div class="service-card" data-aos="fade-up">
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 80 }}">
                         <a href="{{ url('/service-details/' . $service->slug) }}">
                             <div class="service-card-img">
+                                <span class="service-card-num">{{ str_pad($loop->index + 1, 2, '0', STR_PAD_LEFT) }}</span>
                                 @if($service->image)
-                                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+                                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" loading="lazy">
                                 @else
-                                <img src="{{ asset('front_assets/images/serv1.webp') }}" alt="{{ $service->name }}">
+                                <img src="{{ asset('front_assets/images/serv1.webp') }}" alt="{{ $service->name }}" loading="lazy">
                                 @endif
                             </div>
                             <div class="service-card-body">
@@ -55,13 +55,14 @@
         @else
         <div class="services-list-grid">
             @forelse($services as $service)
-            <div class="service-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 60 }}">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 80 }}">
                 <a href="{{ url('/service-details/' . $service->slug) }}">
                     <div class="service-card-img">
+                        <span class="service-card-num">{{ str_pad($loop->index + 1, 2, '0', STR_PAD_LEFT) }}</span>
                         @if($service->image)
-                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" loading="lazy">
                         @else
-                        <img src="{{ asset('front_assets/images/serv1.webp') }}" alt="{{ $service->name }}">
+                        <img src="{{ asset('front_assets/images/serv1.webp') }}" alt="{{ $service->name }}" loading="lazy">
                         @endif
                     </div>
                     <div class="service-card-body">
@@ -72,19 +73,22 @@
                 </a>
             </div>
             @empty
-            <p style="color:var(--text-muted);">No services found. Please add services from the admin panel.</p>
+            <div class="empty-state">
+                <i class="bi bi-activity"></i>
+                <p>No services found. Please add services from the admin panel.</p>
+            </div>
             @endforelse
         </div>
         @endif
 
-        <div class="cta-banner" data-aos="zoom-in" style="margin-top:56px;">
+        <div class="cta-banner" data-aos="fade-up">
             <div>
                 <h3>Need Help Choosing The Right Treatment?</h3>
                 <p>Our experts will assess your condition and recommend the best therapy plan for you.</p>
             </div>
-            <button class="btn-p2gh btn-p2gh-white openForm" style="flex-shrink:0;">
+            <button class="btn-p2gh btn-p2gh-white openForm">
                 <span>Book Consultation</span>
-                <span class="btn-icon" style="color:var(--primary);">↗</span>
+                <span class="btn-icon">↗</span>
             </button>
         </div>
     </div>

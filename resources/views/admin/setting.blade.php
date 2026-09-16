@@ -201,6 +201,34 @@
                     </div>
                 </div>
 
+                {{-- Office Timings --}}
+                <h6 class="fw-bold mb-3 mt-4">Office Timings :</h6>
+                <div id="office-timings-wrap" class="col-md-12">
+    @php $timings = $settings?->office_timings ?? []; @endphp
+    @foreach($timings ?: [['title' => '', 'time' => '']] as $i => $t)
+                    <div class="row office-timing-row align-items-center mb-3">
+                        <div class="col-md-5">
+                            <div class="form-floating form-floating-outline">
+                                <input type="text" name="office_timings[{{ $i }}][title]" class="form-control" placeholder="e.g. Mon - Sat" value="{{ $t['title'] ?? '' }}">
+                                <label>Day / Title</label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-floating form-floating-outline">
+                                <input type="text" name="office_timings[{{ $i }}][time]" class="form-control" placeholder="e.g. 9:00 AM - 8:00 PM" value="{{ $t['time'] ?? '' }}">
+                                <label>Time</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-outline-danger btn-sm remove-timing-row"><i class="ri-delete-bin-line"></i> Remove</button>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="col-md-12 mb-4">
+                    <button type="button" id="add-timing-row" class="btn btn-outline-primary btn-sm"><i class="ri-add-line"></i> Add More Timing</button>
+                </div>
+
                 {{-- <h6 class="fw-bold mb-3">Company Currency :</h6>
                 <div class="col-md-6 mb-4">
                     <div class="form-floating form-floating-outline">
@@ -233,8 +261,40 @@
 
 <script>
     let csrfToken = $('meta[name="csrf-token"]').attr('content');
+    let timingIndex = $('#office-timings-wrap .office-timing-row').length;
+
+    function timingRowHtml(idx, title = '', time = '') {
+        return `
+        <div class="row office-timing-row align-items-center mb-3">
+            <div class="col-md-5">
+                <div class="form-floating form-floating-outline">
+                    <input type="text" name="office_timings[${idx}][title]" class="form-control" placeholder="e.g. Mon - Sat" value="${title}">
+                    <label>Day / Title</label>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-floating form-floating-outline">
+                    <input type="text" name="office_timings[${idx}][time]" class="form-control" placeholder="e.g. 9:00 AM - 8:00 PM" value="${time}">
+                    <label>Time</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-danger btn-sm remove-timing-row"><i class="ri-delete-bin-line"></i> Remove</button>
+            </div>
+        </div>`;
+    }
+
     $(document).ready(function() {
         $('#company-settings-form').submit(updateSettings);
+
+        $('#add-timing-row').click(function() {
+            $('#office-timings-wrap').append(timingRowHtml(timingIndex));
+            timingIndex++;
+        });
+
+        $(document).on('click', '.remove-timing-row', function() {
+            $(this).closest('.office-timing-row').remove();
+        });
         $('input[type="file"]').change(function() {
             let id = $(this).attr('id');
             let previewId = 'show-' + id;
@@ -274,6 +334,23 @@
                     if (s.light_logo) $('#show-lightlogo').attr('src', '/storage/' + s.light_logo).removeClass('d-none');
                     if (s.footer_images) $('#show-darklogo').attr('src', '/storage/' + s.footer_images).removeClass('d-none');
                     if (s.favicon) $('#show-favicon').attr('src', '/storage/' + s.favicon).removeClass('d-none');
+
+                    // Office timings rows rebuild karo
+                    let timings = s.office_timings;
+                    if (typeof timings === 'string') {
+                        try { timings = JSON.parse(timings); } catch (e) { timings = []; }
+                    }
+                    $('#office-timings-wrap').empty();
+                    timingIndex = 0;
+                    if (timings && timings.length) {
+                        timings.forEach(function(t) {
+                            $('#office-timings-wrap').append(timingRowHtml(timingIndex, t.title || '', t.time || ''));
+                            timingIndex++;
+                        });
+                    } else {
+                        $('#office-timings-wrap').append(timingRowHtml(0));
+                        timingIndex = 1;
+                    }
                 }
             },
             error: function() {

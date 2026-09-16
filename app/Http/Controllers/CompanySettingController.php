@@ -48,6 +48,9 @@ class CompanySettingController extends Controller
             'company_address2' => 'nullable|string',
             'currency_name' => 'nullable|string|max:50',
             'currency_symbol' => 'nullable|string|max:10',
+            'office_timings' => 'nullable|array',
+            'office_timings.*.title' => 'nullable|string|max:100',
+            'office_timings.*.time' => 'nullable|string|max:100',
         ]);
 
         $settings = CompanySetting::firstOrCreate([]);
@@ -61,6 +64,14 @@ class CompanySettingController extends Controller
             'company_address1', 'company_address2',
             'currency_name', 'currency_symbol'
         ]);
+
+        // Office timings — khali rows (jinme title aur time dono khali hain) hata do, baaki ek JSON array me save
+        if ($request->has('office_timings')) {
+            $data['office_timings'] = collect($request->input('office_timings', []))
+                ->filter(fn ($row) => !empty($row['title']) || !empty($row['time']))
+                ->values()
+                ->all();
+        }
 
       // Handle file uploads — sirf jab new file aayi ho
     if ($request->hasFile('light_logo')) {

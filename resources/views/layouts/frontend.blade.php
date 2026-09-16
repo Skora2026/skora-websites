@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title', settings('company_name') ?? 'P2GH - 24*7 Physiotherapy')</title>
-    <meta name="description" content="@yield('meta_desc', 'P2GH - 24*7 Physiotherapy. Expert physiotherapy care available round the clock. Book your appointment today.')">
+    <title>@yield('title', settings('company_name') ?? 'Navodayan Neuroclinic & Neurorehab')</title>
+    <meta name="description" content="@yield('meta_desc', 'Navodayan Neuroclinic & Neurorehab. Expert neuro consultation, physiotherapy, and rehabilitation care. Book your appointment today.')">
     <link rel="icon" type="image/png" href="{{ settings('favicon') ? asset('storage/' . settings('favicon')) : asset('front_assets/images/logo.png') }}">
 
     {{-- Master CSS - Single file for entire website --}}
@@ -39,25 +39,30 @@
                 <span>{{ settings('company_mobile1') }}</span>
             </a>
             @endif
+            @if(!empty(settings('company_email1')))
+            <a href="mailto:{{ settings('company_email1') }}" class="topbar-item">
+                <i class="bi bi-envelope-fill"></i>
+                <span>{{ settings('company_email1') }}</span>
+            </a>
+            @endif
             <div class="topbar-item">
                 <i class="bi bi-clock-fill"></i>
-                <span>{{ settings('working_hours') ?? 'Open 24 hours' }}</span>
-                <span class="topbar-badge">24×7</span>
+                <span>{{ settings('working_hours') ?? 'Physiotherapy: 9:30 AM to 7:00 PM' }}</span>
             </div>
         </div>
         <div class="topbar-socials">
             @if(!empty(settings('instagram')))
-            <a href="{{ settings('instagram') }}" class="topbar-social-link" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="{{ settings('instagram') }}" class="topbar-social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
             @endif
             @if(!empty(settings('facebook')))
-            <a href="{{ settings('facebook') }}" class="topbar-social-link" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="{{ settings('facebook') }}" class="topbar-social-link" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
             @endif
             @if(!empty(settings('company_whatsapp1')))
             @php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); @endphp
-            <a href="https://wa.me/{{ $wp }}" class="topbar-social-link" target="_blank"><i class="bi bi-whatsapp"></i></a>
+            <a href="https://wa.me/{{ $wp }}" class="topbar-social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
             @endif
             @if(!empty(settings('pintrest')))
-            <a href="{{ settings('pintrest') }}" class="topbar-social-link" target="_blank"><i class="bi bi-youtube"></i></a>
+            <a href="{{ settings('pintrest') }}" class="topbar-social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
             @endif
         </div>
     </div>
@@ -93,13 +98,13 @@
                 <a href="{{ url('/about-us') }}" class="nav-link">About</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link" style="display:flex;align-items:center;gap:5px;">
-                    Services <i class="bi bi-chevron-down" style="font-size:11px;"></i>
+                <a href="#" class="nav-link" aria-haspopup="true">
+                    Services <i class="bi bi-chevron-down" style="font-size:10px;"></i>
                 </a>
                 <div class="nav-dropdown">
                     @forelse($services as $service)
                     <a href="{{ url('/service-details/' . $service->slug) }}">
-                        <i class="bi bi-activity" style="color:var(--primary);font-size:13px;"></i>
+                        <i class="bi bi-activity"></i>
                         {{ $service->name }}
                     </a>
                     @empty
@@ -107,7 +112,7 @@
                     @endforelse
                     <div class="dropdown-divider"></div>
                     <a href="{{ url('/services') }}" style="font-weight:700;color:var(--primary);">
-                        <i class="bi bi-grid-3x3-gap" style="font-size:13px;"></i>
+                        <i class="bi bi-grid-3x3-gap"></i>
                         View All Services
                     </a>
                 </div>
@@ -116,34 +121,40 @@
                 <a href="{{ url('/blogs') }}" class="nav-link">Blogs</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link" style="display:flex;align-items:center;gap:5px;">
-                    Gallery <i class="bi bi-chevron-down" style="font-size:11px;"></i>
+                <a href="#" class="nav-link" aria-haspopup="true">
+                    Gallery <i class="bi bi-chevron-down" style="font-size:10px;"></i>
                 </a>
                 <div class="nav-dropdown">
-                    <a href="{{ url('/gallery') }}"><i class="bi bi-images" style="color:var(--primary);font-size:13px;"></i> Photo Gallery</a>
-                    <a href="{{ url('/video') }}"><i class="bi bi-camera-video" style="color:var(--primary);font-size:13px;"></i> Video Gallery</a>
+                    <a href="{{ url('/gallery') }}"><i class="bi bi-images"></i> Photo Gallery</a>
+                    <a href="{{ url('/video') }}"><i class="bi bi-camera-video"></i> Video Gallery</a>
                 </div>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/contact-us') }}" class="nav-link">Contact</a>
             </li>
+            <li class="nav-item nav-cta-mobile">
+                <button class="btn-p2gh openForm">
+                    <span>Book Appointment</span>
+                    <span class="btn-icon">↗</span>
+                </button>
+            </li>
         </ul>
 
         {{-- CTA --}}
         <div class="nav-cta">
-            <button class="btn-p2gh openForm" style="padding:11px 22px;font-size:13px;">
+            <button class="btn-p2gh openForm">
                 <span>Book Appointment</span>
                 <span class="btn-icon">↗</span>
             </button>
             @auth
                 @if(auth()->user()->role === 'admin')
-                <a href="{{ url('/admin-dashboard') }}" class="btn-p2gh-outline" style="padding:10px 18px;font-size:13px;">Dashboard</a>
+                <a href="{{ url('/admin-dashboard') }}" class="btn-p2gh btn-p2gh-outline">Dashboard</a>
                 @endif
             @endauth
         </div>
 
         {{-- Mobile toggle --}}
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
 
@@ -154,7 +165,7 @@
 @yield('content')
 
 {{-- ===== TICKER (Dynamic — from HeroBanner.move_text, split by "||") ===== --}}
-<div class="p2gh-ticker">
+<div class="p2gh-ticker" aria-hidden="true">
     <div class="ticker-wrapper">
         @php $tickerItems = hero_ticker_items(); @endphp
         @foreach($tickerItems as $item)
@@ -176,20 +187,20 @@
             <div class="footer-brand">
                 <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('front_assets/images/logo.png') }}"
                      alt="{{ settings('company_short_name') }}" class="brand-logo">
-                <p class="brand-desc">{{ settings('company_description') ?? 'Expert physiotherapy care available round the clock. We help you recover faster and live pain-free.' }}</p>
+                <p class="brand-desc">{{ settings('company_description') ?? 'Expert neuro consultation, physiotherapy, and rehabilitation care. We help you recover faster and live pain-free.' }}</p>
                 <div class="footer-socials">
                     @if(!empty(settings('instagram')))
-                    <a href="{{ settings('instagram') }}" class="footer-social" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="{{ settings('instagram') }}" class="footer-social" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
                     @endif
                     @if(!empty(settings('facebook')))
-                    <a href="{{ settings('facebook') }}" class="footer-social" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="{{ settings('facebook') }}" class="footer-social" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                     @endif
                     @if(!empty(settings('company_whatsapp1')))
                     @php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); @endphp
-                    <a href="https://wa.me/{{ $wp }}" class="footer-social" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                    <a href="https://wa.me/{{ $wp }}" class="footer-social" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
                     @endif
                     @if(!empty(settings('pintrest')))
-                    <a href="{{ settings('pintrest') }}" class="footer-social" target="_blank"><i class="bi bi-youtube"></i></a>
+                    <a href="{{ settings('pintrest') }}" class="footer-social" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                     @endif
                 </div>
             </div>
@@ -249,6 +260,9 @@
                     <div class="fci-text">
                         <h6>Phone</h6>
                         <a href="tel:{{ settings('company_mobile1') }}">{{ settings('company_mobile1') }}</a>
+                        @if(!empty(settings('company_mobile2')))<br>
+                        <a href="tel:{{ settings('company_mobile2') }}">{{ settings('company_mobile2') }}</a>
+                        @endif
                     </div>
                 </div>
                 @endif
@@ -256,8 +270,15 @@
                 <div class="footer-contact-item">
                     <div class="fci-icon"><i class="bi bi-clock-fill"></i></div>
                     <div class="fci-text">
-                        <h6>Working Hours</h6>
-                        <p>{{ settings('working_hours') ?? 'Open 24 hours' }}</p>
+                        <h6>Office Timings</h6>
+                        @php $officeTimings = settings('office_timings'); @endphp
+                        @if(!empty($officeTimings))
+                            @foreach($officeTimings as $timing)
+                                <p style="margin-bottom:2px;"><strong>{{ $timing['title'] ?? '' }}:</strong> {{ $timing['time'] ?? '' }}</p>
+                            @endforeach
+                        @else
+                            <p>{{ settings('working_hours') ?? 'Physiotherapy: 9:30 AM to 7:00 PM' }}</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -266,20 +287,20 @@
 
         <div class="footer-bottom">
             <p>© {{ date('Y') }} {{ settings('company_name') ?? 'P2GH - 24*7 Physiotherapy' }}. All rights reserved.</p>
-            <p>Designed & Developed by <a href="https://www.skorasoft.com/" target="_blank">SkoraSoft</a></p>
+            <p>Designed &amp; Developed by <a href="https://www.skorasoft.com/" target="_blank" rel="noopener">SkoraSoft</a></p>
         </div>
     </div>
 </footer>
 
 {{-- ===== POPUP APPOINTMENT FORM ===== --}}
-<div class="p2gh-popup" id="popupForm">
+<div class="p2gh-popup" id="popupForm" role="dialog" aria-modal="true" aria-label="Book Appointment">
     <div class="popup-box">
         <div class="popup-header">
             <div>
                 <h3>Book Appointment</h3>
                 <p>We'll confirm your slot within 2 hours</p>
             </div>
-            <button class="popup-close" id="closeForm">✕</button>
+            <button class="popup-close" id="closeForm" aria-label="Close">✕</button>
         </div>
         <div class="popup-body">
             <form action="{{ route('admin.appointments.save') }}" method="POST">
@@ -311,7 +332,7 @@
                     <label class="form-label">Message (Optional)</label>
                     <textarea name="message" class="form-control-p2gh" placeholder="Describe your symptoms or any specific concerns..."></textarea>
                 </div>
-                <button type="submit" class="btn-p2gh" style="width:100%;justify-content:center;margin-top:8px;">
+                <button type="submit" class="btn-p2gh btn-p2gh-accent" style="width:100%;margin-top:8px;">
                     <span>Submit Appointment Request</span>
                     <span class="btn-icon">→</span>
                 </button>
@@ -324,7 +345,7 @@
 <div class="float-actions">
     @if(!empty(settings('company_whatsapp1')))
     @php $wp = preg_replace('/\D/', '', settings('company_whatsapp1')); @endphp
-    <a href="https://wa.me/{{ $wp }}?text=Hello, I would like to book a physiotherapy appointment." class="float-btn whatsapp" target="_blank" title="WhatsApp Us">
+    <a href="https://wa.me/{{ $wp }}?text=Hello, I would like to book a physiotherapy appointment." class="float-btn whatsapp" target="_blank" rel="noopener" title="WhatsApp Us">
         <i class="bi bi-whatsapp"></i>
     </a>
     @endif
@@ -340,156 +361,212 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-// Measure the topbar's real rendered height and feed it into the
-// --topbar-height CSS variable, so the fixed navbar is always pushed exactly
-// below it (no overlap, no gap) regardless of font rendering differences
-// across browsers/OSes. Re-measures on resize since the topbar hides below
-// the lg breakpoint (992px).
-function syncTopbarHeight() {
-    const topbar = document.querySelector('.p2gh-topbar');
-    if (!topbar) return;
-    const isVisible = window.getComputedStyle(topbar).display !== 'none';
-    document.documentElement.style.setProperty(
-        '--topbar-height',
-        isVisible ? topbar.offsetHeight + 'px' : '0px'
-    );
-}
-syncTopbarHeight();
-window.addEventListener('resize', syncTopbarHeight);
+(function () {
+    'use strict';
 
-// AOS Init
-AOS.init({ duration: 700, once: true, offset: 60 });
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Navbar scroll behavior
-const nav = document.getElementById('mainNav');
-
-function updateNavbarOnScroll() {
-    if (window.scrollY > 60) {
-        nav.classList.remove('transparent');
-        nav.classList.add('scrolled');
-    } else if (nav.dataset.hero === '1') {
-        nav.classList.add('transparent');
-        nav.classList.remove('scrolled');
-    } else {
-        nav.classList.remove('transparent');
-        nav.classList.remove('scrolled');
+    // ── Topbar height → CSS variable (fixed navbar offset) ────────
+    function syncTopbarHeight() {
+        var topbar = document.querySelector('.p2gh-topbar');
+        if (!topbar) return;
+        var isVisible = window.getComputedStyle(topbar).display !== 'none';
+        document.documentElement.style.setProperty(
+            '--topbar-height',
+            isVisible ? topbar.offsetHeight + 'px' : '0px'
+        );
     }
-}
+    syncTopbarHeight();
+    window.addEventListener('resize', syncTopbarHeight);
 
-// Run once immediately so the correct state is applied before the user sees a flash
-updateNavbarOnScroll();
-window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+    // ── AOS init ──────────────────────────────────────────────────
+    if (window.AOS) {
+        AOS.init({ duration: 750, once: true, offset: 60, easing: 'ease-out-cubic' });
+    }
 
-// JS has now taken over navbar state — the early CSS anti-flicker hook isn't needed anymore
-document.documentElement.classList.remove('nav-prescroll');
+    // ── Navbar scroll state ───────────────────────────────────────
+    var nav = document.getElementById('mainNav');
 
-// Mobile nav toggle
-const navToggle = document.getElementById('navToggle');
-navToggle?.addEventListener('click', () => {
-    nav.classList.toggle('mobile-open');
-    // Closing the menu should also reset any open dropdown state
-    if (!nav.classList.contains('mobile-open')) {
-        document.querySelectorAll('.nav-menu .nav-item.dropdown-open').forEach((openItem) => {
-            openItem.classList.remove('dropdown-open');
+    function updateNavbarOnScroll() {
+        if (window.scrollY > 60) {
+            nav.classList.remove('transparent');
+            nav.classList.add('scrolled');
+        } else if (nav.dataset.hero === '1') {
+            nav.classList.add('transparent');
+            nav.classList.remove('scrolled');
+        } else {
+            nav.classList.remove('transparent');
+            nav.classList.remove('scrolled');
+        }
+    }
+    updateNavbarOnScroll();
+    window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+    document.documentElement.classList.remove('nav-prescroll');
+
+    // ── Mobile nav drawer ─────────────────────────────────────────
+    var navToggle = document.getElementById('navToggle');
+
+    function closeMobileNav() {
+        nav.classList.remove('mobile-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        document.querySelectorAll('.nav-menu .nav-item.dropdown-open').forEach(function (item) {
+            item.classList.remove('dropdown-open');
         });
     }
-});
 
-// Mobile dropdown toggle (tap-to-open instead of hover, since hover is
-// unreliable on touch devices) — only active while the mobile menu is open.
-document.querySelectorAll('.nav-menu .nav-item').forEach((item) => {
-    const dropdown = item.querySelector('.nav-dropdown');
-    if (!dropdown) return;
-
-    const trigger = item.querySelector('.nav-link');
-    trigger?.addEventListener('click', (e) => {
-        if (!nav.classList.contains('mobile-open')) return; // desktop uses hover
-        e.preventDefault();
-        const wasOpen = item.classList.contains('dropdown-open');
-        document.querySelectorAll('.nav-menu .nav-item.dropdown-open').forEach((openItem) => {
-            if (openItem !== item) openItem.classList.remove('dropdown-open');
-        });
-        item.classList.toggle('dropdown-open', !wasOpen);
+    navToggle.addEventListener('click', function () {
+        var isOpen = nav.classList.toggle('mobile-open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+        if (!isOpen) {
+            document.querySelectorAll('.nav-menu .nav-item.dropdown-open').forEach(function (item) {
+                item.classList.remove('dropdown-open');
+            });
+        }
     });
-});
 
-// Popup form
-const openBtns = document.querySelectorAll('.openForm');
-const popup = document.getElementById('popupForm');
-const closeBtn = document.getElementById('closeForm');
+    // Close drawer with Escape
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('mobile-open')) closeMobileNav();
+    });
 
-openBtns.forEach(btn => btn.addEventListener('click', () => {
-    popup.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}));
+    // Mobile dropdown tap-toggle (desktop uses hover)
+    document.querySelectorAll('.nav-menu .nav-item').forEach(function (item) {
+        var dropdown = item.querySelector('.nav-dropdown');
+        if (!dropdown) return;
 
-closeBtn?.addEventListener('click', () => {
-    popup.classList.remove('active');
-    document.body.style.overflow = '';
-});
+        var trigger = item.querySelector('.nav-link');
+        trigger.addEventListener('click', function (e) {
+            if (!nav.classList.contains('mobile-open')) return; // desktop = hover
+            e.preventDefault();
+            var wasOpen = item.classList.contains('dropdown-open');
+            document.querySelectorAll('.nav-menu .nav-item.dropdown-open').forEach(function (openItem) {
+                if (openItem !== item) openItem.classList.remove('dropdown-open');
+            });
+            item.classList.toggle('dropdown-open', !wasOpen);
+        });
+    });
 
-popup?.addEventListener('click', (e) => {
-    if (e.target === popup) {
+    // ── Popup appointment form ────────────────────────────────────
+    var popup = document.getElementById('popupForm');
+    var closeBtn = document.getElementById('closeForm');
+
+    document.querySelectorAll('.openForm').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            if (nav.classList.contains('mobile-open')) closeMobileNav();
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            var firstField = popup.querySelector('input[name="name"]');
+            if (firstField) setTimeout(function () { firstField.focus(); }, 250);
+        });
+    });
+
+    function closePopup() {
         popup.classList.remove('active');
         document.body.style.overflow = '';
     }
-});
 
-// FAQ Accordion (custom, no Bootstrap)
-document.querySelectorAll('.faq-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-        const item = trigger.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
+    closeBtn.addEventListener('click', closePopup);
+    popup.addEventListener('click', function (e) {
+        if (e.target === popup) closePopup();
     });
-});
-
-// Testimonial Swiper
-if (document.querySelector('.testimonial-slider')) {
-    new Swiper('.testimonial-slider', {
-        loop: true,
-        speed: 900,
-        autoplay: { delay: 3500, disableOnInteraction: false },
-        spaceBetween: 24,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        breakpoints: {
-            0: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1200: { slidesPerView: 3 }
-        }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && popup.classList.contains('active')) closePopup();
     });
-}
 
-// Counter animation
-function animateCounter(el) {
-    const target = parseInt(el.getAttribute('data-target'));
-    const suffix = el.getAttribute('data-suffix') || '';
-    let current = 0;
-    const step = Math.ceil(target / 60);
-    const interval = setInterval(() => {
-        current += step;
-        if (current >= target) {
-            current = target;
-            clearInterval(interval);
-        }
-        el.textContent = current + suffix;
-    }, 30);
-}
+    // ── FAQ accordion (smooth grid-rows animation) ────────────────
+    document.querySelectorAll('.faq-trigger').forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+            var item = trigger.closest('.faq-item');
+            var isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+            if (!isOpen) item.classList.add('open');
+        });
+    });
 
-// Intersection observer for counters
-const counterEls = document.querySelectorAll('[data-target]');
-if (counterEls.length) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
+    // ── Testimonial Swiper ────────────────────────────────────────
+    if (window.Swiper && document.querySelector('.testimonial-slider')) {
+        new Swiper('.testimonial-slider', {
+            loop: document.querySelectorAll('.testimonial-slider .swiper-slide').length > 3,
+            speed: reduceMotion ? 0 : 850,
+            autoplay: reduceMotion ? false : { delay: 4200, disableOnInteraction: false, pauseOnMouseEnter: true },
+            spaceBetween: 24,
+            grabCursor: true,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+                0: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1200: { slidesPerView: 3 }
             }
         });
-    }, { threshold: 0.5 });
-    counterEls.forEach(el => observer.observe(el));
-}
+    }
+
+    // ── Counter animation (fixed-timing rAF version) ──────────────
+    function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+        var suffix = el.getAttribute('data-suffix') || '';
+        if (reduceMotion) { el.textContent = target + suffix; return; }
+        var duration = 1600;
+        var start = null;
+        function tick(ts) {
+            if (!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased) + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    }
+
+    var counterEls = document.querySelectorAll('[data-target]');
+    if (counterEls.length) {
+        var counterObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        counterEls.forEach(function (el) { counterObserver.observe(el); });
+    }
+
+    // ── Scroll reveal system (classes: reveal / reveal-left / reveal-right / reveal-zoom / reveal-img) ──
+    var revealEls = document.querySelectorAll('.reveal, .reveal-img');
+    if (revealEls.length) {
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+            revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+        } else {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+            revealEls.forEach(function (el) { revealObserver.observe(el); });
+        }
+    }
+
+    // ── Subtle hero parallax (transform-only, rAF-throttled) ──────
+    var heroBg = document.querySelector('.hero-bg');
+    if (heroBg && !reduceMotion) {
+        var ticking = false;
+        window.addEventListener('scroll', function () {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(function () {
+                var y = window.scrollY;
+                if (y < window.innerHeight * 1.2) {
+                    heroBg.style.transform = 'translate3d(0,' + (y * 0.22) + 'px,0)';
+                }
+                ticking = false;
+            });
+        }, { passive: true });
+    }
+})();
 </script>
 
 @stack('scripts')

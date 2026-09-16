@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2GH || Forgot Password</title>
-    <meta name="description" content="Reset your P2GH account password." />
+    <title>Navodayan || Forgot Password</title>
+    <meta name="description" content="Reset your Navodayan account password." />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
      <link rel="stylesheet" href="{{ asset('front_assets/css/login-register.css') }}" />
@@ -335,8 +335,8 @@
         <div class="forgot-header">
             <h1 class="forgot-logo">
                 <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) 
-                            : asset('assets-front/img-main.png') }}" alt="{{ settings('company_short_name') ?? 'P2GH' }}" alt="P2GH Logo">
-                <span class="logo-text">{{ settings('company_short_name') ?? 'P2GH & Reality Service' }}</span>
+                            : asset('assets-front/img-main.png') }}" alt="{{ settings('company_short_name') ?? 'Navodayan' }}" alt="Navodayan Logo">
+                <span class="logo-text">{{ settings('company_short_name') ?? 'Navodayan & Reality Service' }}</span>
             </h1>
             <h2 class="forgot-title">Reset Your Password</h2>
             <p class="forgot-subtitle">
