@@ -1844,7 +1844,7 @@ html.nav-prescroll .p2gh-navbar.transparent .nav-toggle span { background: var(-
   position: relative;
   background: var(--ink);
   padding: calc(var(--nav-h) + clamp(56px, 9vw, 110px)) 0 clamp(44px, 6vw, 76px);
-  text-align: center;
+  text-align: left;
   overflow: hidden;
 }
 
@@ -1859,15 +1859,7 @@ html.nav-prescroll .p2gh-navbar.transparent .nav-toggle span { background: var(-
 }
 
 .page-hero::after {
-  content: '';
-  position: absolute;
-  right: -90px;
-  top: -90px;
-  width: 320px;
-  height: 320px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  pointer-events: none;
+  content: none;
 }
 
 .page-hero .container-p2gh { position: relative; z-index: 1; }
@@ -1883,7 +1875,7 @@ html.nav-prescroll .p2gh-navbar.transparent .nav-toggle span { background: var(-
 .page-hero .breadcrumb-nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 10px;
   font-family: var(--font-ui);
@@ -1898,8 +1890,9 @@ html.nav-prescroll .p2gh-navbar.transparent .nav-toggle span { background: var(-
 .page-hero .breadcrumb-nav .sep { color: rgba(255, 255, 255, 0.28); }
 
 /* --- Page-hero photo background --------------------------------
-   Photo fades in, then a navy scrim fades it out ONLY behind the
-   centered text zone — the photo stays visible at the edges.     */
+   Photo fades in, then a left-side navy scrim fades it out so the
+   left-aligned title always reads clearly; photo stays visible at
+   the right edge.                                              */
 .page-hero-bg {
   position: absolute;
   inset: 0;
@@ -1919,25 +1912,25 @@ html.nav-prescroll .p2gh-navbar.transparent .nav-toggle span { background: var(-
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 84% 130% at 50% 48%,
-      rgba(8, 26, 48, 0.97) 0%,
-      rgba(8, 26, 48, 0.96) 52%,
-      rgba(8, 26, 48, 0.80) 76%,
-      rgba(8, 26, 48, 0.30) 93%,
-      rgba(8, 26, 48, 0) 100%),
-    linear-gradient(180deg, rgba(8, 26, 48, 0.55) 0%, rgba(8, 26, 48, 0.42) 50%, rgba(8, 26, 48, 0.62) 100%);
+    linear-gradient(90deg,
+      rgba(8, 26, 48, 0.92) 0%,
+      rgba(8, 26, 48, 0.78) 34%,
+      rgba(8, 26, 48, 0.42) 62%,
+      rgba(8, 26, 48, 0.12) 86%,
+      rgba(8, 26, 48, 0.05) 100%),
+    linear-gradient(180deg, rgba(8, 26, 48, 0.35) 0%, rgba(8, 26, 48, 0.18) 55%, rgba(8, 26, 48, 0.45) 100%);
   pointer-events: none;
 }
 
 @media (max-width: 640px) {
   .page-hero--img::after {
     background:
-      radial-gradient(ellipse 155% 95% at 50% 48%,
-        rgba(8, 26, 48, 0.97) 0%,
-        rgba(8, 26, 48, 0.95) 55%,
-        rgba(8, 26, 48, 0.60) 82%,
-        rgba(8, 26, 48, 0) 100%),
-      linear-gradient(180deg, rgba(8, 26, 48, 0.55) 0%, rgba(8, 26, 48, 0.45) 55%, rgba(8, 26, 48, 0.65) 100%);
+      linear-gradient(90deg,
+        rgba(8, 26, 48, 0.94) 0%,
+        rgba(8, 26, 48, 0.82) 45%,
+        rgba(8, 26, 48, 0.45) 78%,
+        rgba(8, 26, 48, 0.18) 100%),
+      linear-gradient(180deg, rgba(8, 26, 48, 0.35) 0%, rgba(8, 26, 48, 0.20) 55%, rgba(8, 26, 48, 0.45) 100%);
   }
 }
 
@@ -3022,7 +3015,7 @@ textarea.form-control-p2gh { resize: vertical; min-height: 110px; }
 .camps-hero-desc {
   color: rgba(255, 255, 255, 0.82);
   max-width: 620px;
-  margin: 18px auto 0;
+  margin: 18px 0 0;
   font-weight: 300;
   line-height: 1.85;
 }

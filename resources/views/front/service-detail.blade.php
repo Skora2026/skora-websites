@@ -6,15 +6,7 @@
 <div class="page-hero page-hero--img">
     <div class="page-hero-bg" style="background-image: url('{{ $service && $service->image ? asset('storage/' . $service->image) : asset('front_assets/images/page-hero-photo.jpg') }}');"></div>
     <div class="container-p2gh">
-        <div class="breadcrumb-title" data-aos="fade-down">{{ $service->name ?? 'Service Detail' }}</div>
-        <nav class="breadcrumb-nav" data-aos="fade-up">
-            <a href="{{ url('/') }}">Home</a>
-            <span class="sep">/</span>
-            <a href="{{ url('/services') }}">Services</a>
-            <span class="sep">/</span>
-            <span>{{ $service->name ?? '' }}</span>
-        </nav>
-    </div>
+        <div class="breadcrumb-title" data-aos="fade-down">{{ $service->name ?? 'Service Detail' }}</div></div>
 </div>
 
 <section class="p2gh-section">

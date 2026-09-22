@@ -6,15 +6,7 @@
 <div class="page-hero page-hero--img">
     <div class="page-hero-bg" style="background-image: url('{{ $blog && $blog->image ? asset($blog->image) : asset('front_assets/images/page-hero-photo.jpg') }}');"></div>
     <div class="container-p2gh">
-        <div class="breadcrumb-title" data-aos="fade-down" style="font-size:1.6rem;">{{ Str::limit($blog->title ?? 'Blog Post', 60) }}</div>
-        <nav class="breadcrumb-nav" data-aos="fade-up">
-            <a href="{{ url('/') }}">Home</a>
-            <span class="sep">/</span>
-            <a href="{{ url('/blogs') }}">Blogs</a>
-            <span class="sep">/</span>
-            <span>Article</span>
-        </nav>
-    </div>
+        <div class="breadcrumb-title" data-aos="fade-down" style="font-size:1.6rem;">{{ Str::limit($blog->title ?? 'Blog Post', 60) }}</div></div>
 </div>
 
 <section class="p2gh-section">

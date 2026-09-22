@@ -8,13 +8,7 @@
 <section class="page-hero page-hero--img camps-hero">
     <div class="page-hero-bg" style="background-image: url('{{ asset('front_assets/images/camps-photo.jpg') }}');"></div>
     <div class="container-p2gh">
-        <div class="breadcrumb-title">Health Camps</div>
-        <nav class="breadcrumb-nav">
-            <a href="{{ url('/') }}">Home</a>
-            <span class="sep">/</span>
-            <span>Camps</span>
-        </nav>
-        <p class="camps-hero-desc">Free check-ups, expert consultations and awareness drives organised by
+        <div class="breadcrumb-title">Health Camps</div><p class="camps-hero-desc">Free check-ups, expert consultations and awareness drives organised by
             {{ settings('company_name') ?? 'Navodayan Neuroclinic & Neurorehab' }} — on-site and at partner locations.</p>
     </div>
 </section>
