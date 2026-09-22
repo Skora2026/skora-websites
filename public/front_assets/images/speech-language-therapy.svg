@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgs1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2c52"/>
+      <stop offset="100%" stop-color="#062038"/>
+    </linearGradient>
+    <linearGradient id="waves1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8fbcf0"/>
+      <stop offset="100%" stop-color="#d9a531"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="440" fill="url(#bgs1)"/>
+  <circle cx="120" cy="90" r="150" fill="#12365f" opacity="0.5"/>
+
+  <!-- speaking head hint -->
+  <g transform="translate(220 210)" fill="#2f5da8">
+    <circle cx="0" cy="-40" r="78"/>
+    <path d="M-40,20 C-46,70 -20,100 20,102 C60,100 84,72 78,20
+             C60,40 20,48 -40,20 Z" opacity="0.95"/>
+    <path d="M30,58 L86,74 L34,88 Z" fill="#d9a531"/>
+  </g>
+
+  <!-- sound waves -->
+  <g stroke="url(#waves1)" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M370,160 v120"/>
+    <path d="M410,130 v180"/>
+    <path d="M450,100 v240"/>
+    <path d="M490,140 v160"/>
+    <path d="M530,170 v100"/>
+  </g>
+
+  <!-- letters floating (language) -->
+  <g font-family="Georgia, serif" font-weight="bold">
+    <text x="60"  y="130" font-size="42" fill="#8fbcf0" opacity="0.85">A</text>
+    <text x="120" y="90"  font-size="30" fill="#d9a531" opacity="0.85">B</text>
+    <text x="90"  y="330" font-size="34" fill="#8fbcf0" opacity="0.7">C</text>
+    <text x="560" y="90"  font-size="30" fill="#8fbcf0" opacity="0.7">S</text>
+  </g>
+
+  <path d="M60,405 L170,405 L195,377 L225,425 L252,405 L350,405"
+        fill="none" stroke="#d9a531" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+</svg>

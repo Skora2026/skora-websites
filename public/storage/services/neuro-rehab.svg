@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgr1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2c52"/>
+      <stop offset="100%" stop-color="#062038"/>
+    </linearGradient>
+    <linearGradient id="spiner1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d9a531"/>
+      <stop offset="100%" stop-color="#9a711a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="440" fill="url(#bgr1)"/>
+  <circle cx="540" cy="80" r="150" fill="#12365f" opacity="0.5"/>
+
+  <!-- spine -->
+  <g transform="translate(250 60)">
+    <path d="M0,0 C10,60 18,130 8,200 C0,260 -6,290 -2,330"
+          fill="none" stroke="url(#spiner1)" stroke-width="15" stroke-linecap="round"/>
+    <g fill="#eec96e" stroke="#6b4e10" stroke-width="2">
+      <g transform="rotate(-3 -2 30)"><rect x="-30" y="18" width="60" height="22" rx="8"/></g>
+      <g transform="rotate(-2 0 85)"><rect x="-28" y="73" width="56" height="22" rx="8"/></g>
+      <g transform="rotate(0 2 140)"><rect x="-27" y="128" width="54" height="22" rx="8"/></g>
+      <g transform="rotate(1 4 195)"><rect x="-26" y="183" width="52" height="22" rx="8"/></g>
+      <g transform="rotate(1 3 250)"><rect x="-25" y="238" width="50" height="22" rx="8"/></g>
+      <g transform="rotate(0 2 305)"><rect x="-24" y="293" width="48" height="22" rx="8"/></g>
+    </g>
+    <!-- nerve roots -->
+    <g stroke="#d9a531" stroke-width="3" fill="none" opacity="0.6" stroke-linecap="round">
+      <path d="M-32,42 C-58,50 -72,66 -80,88"/>
+      <path d="M32,46 C56,54 70,70 78,92"/>
+      <path d="M-30,152 C-54,160 -66,174 -72,194"/>
+      <path d="M30,156 C52,164 64,178 70,198"/>
+    </g>
+  </g>
+
+  <!-- recovery bars rising -->
+  <g transform="translate(430 180)">
+    <rect x="0"   y="140" width="38" height="80"  rx="6" fill="#8fbcf0" opacity="0.5"/>
+    <rect x="55"  y="100" width="38" height="120" rx="6" fill="#8fbcf0" opacity="0.75"/>
+    <rect x="110" y="55"  width="38" height="165" rx="6" fill="#8fbcf0"/>
+    <!-- arrow -->
+    <path d="M6,120 L60,72 L118,28" fill="none" stroke="#d9a531" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M96,20 L122,25 L114,50" fill="none" stroke="#d9a531" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <path d="M60,410 L170,410 L195,382 L225,430 L252,410 L350,410"
+        fill="none" stroke="#8fbcf0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+</svg>

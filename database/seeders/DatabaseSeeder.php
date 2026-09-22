@@ -50,8 +50,8 @@ class DatabaseSeeder extends Seeder
                 'company_address2'    => 'Z - 21 West Patel Nagar, New Delhi - 110008',
                 'working_hours'       => 'Physiotherapy: 9:30 AM to 7:00 PM',
                 'office_timings'      => [
-                    ['title' => 'Physiotherapy',         'time' => '9:30 AM to 7:00 PM'],
-                    ['title' => 'Neuro Consultant',      'time' => '7:00 PM to 8:00 PM (Sunday - Prior Appointment)'],
+                    ['title' => 'Physiotherapy',           'time' => '9:30 AM to 7:00 PM'],
+                    ['title' => 'Neuro Consultation',      'time' => '7:00 PM to 8:00 PM (Sunday - Prior Appointment)'],
                     ['title' => 'Clinical Psychologist', 'time' => 'Prior Appointment'],
                     ['title' => 'Speech & Language',     'time' => 'Prior Appointment'],
                 ],
@@ -63,8 +63,14 @@ class DatabaseSeeder extends Seeder
         // ── Hero Banner ────────────────────────────────────────────
         if (!HeroBanner::count()) {
             HeroBanner::create([
-                'title'     => 'Move Without Pain. Live Without Limits.',
-                'move_text' => 'Sports Injury Physiotherapy || Orthopedic Rehabilitation || Post-Surgery Recovery || Neurological Physiotherapy',
+                'badge_text'        => 'Advanced Neuro & Spine Care',
+                'heading'           => 'Restoring Brain',
+                'subheading'        => 'And Spine Health.',
+                'description'       => 'Specialist neuro consultations, neuro physiotherapy and rehabilitation for stroke, spine and nerve conditions — precise diagnosis, personal recovery plans, and compassionate care at every step.',
+                'floating_title'    => 'Neuro Expertise',
+                'floating_subtitle' => 'Brain & Spine Rehabilitation Team',
+                'title'     => 'Restoring Brain And Spine Health.',
+                'move_text' => 'Neuro Consultation || Neuro Physiotherapy || Neuro Rehab || General Physiotherapy || Clinical Psychologist || Speech & Language Therapy',
                 'image'     => null,
             ]);
         }
@@ -87,10 +93,10 @@ class DatabaseSeeder extends Seeder
         if (!WhyChooseUsSection::count()) {
             WhyChooseUsSection::create([
                 'sub_title'   => 'Why Choose Us',
-                'main_title'  => 'Excellence In Care And Rehabilitation',
+                'main_title'  => 'Excellence In <span>Neuro Care</span> And Rehabilitation',
                 'right_image' => 'default.jpg',
                 'features'    => [
-                    ['title' => 'Experienced Team',         'description' => 'Certified physiotherapists committed to quality care and your complete recovery.', 'icon' => 'people'],
+                    ['title' => 'Experienced Team',         'description' => 'Certified neuro specialists and therapists committed to quality care and your complete recovery.', 'icon' => 'people'],
                     ['title' => 'Patient-Centered Approach','description' => 'Every treatment plan is customized around your unique condition and recovery goals.', 'icon' => 'heart-pulse'],
                     ['title' => 'Advanced Technology',      'description' => 'Modern diagnostic tools and treatment equipment for precise, effective therapy.', 'icon' => 'cpu'],
                     ['title' => 'Convenient Timings',       'description' => 'Morning to evening physiotherapy hours, with specialist consultations by appointment.', 'icon' => 'clock'],
@@ -128,7 +134,7 @@ class DatabaseSeeder extends Seeder
             $counters = [
                 ['number' => '5000', 'suffix' => '+', 'title' => 'Happy Patients',  'icon' => 'bi-people-fill',  'sort_order' => 1, 'active' => true],
                 ['number' => '20',   'suffix' => '+', 'title' => 'Years Experience', 'icon' => 'bi-award-fill',   'sort_order' => 2, 'active' => true],
-                ['number' => '50',   'suffix' => '+', 'title' => 'Treatment Types',  'icon' => 'bi-activity',     'sort_order' => 3, 'active' => true],
+                ['number' => '50',   'suffix' => '+', 'title' => 'Neuro & Rehab Services',  'icon' => 'bi-activity',     'sort_order' => 3, 'active' => true],
                 ['number' => '98',   'suffix' => '%', 'title' => 'Success Rate',     'icon' => 'bi-star-fill',    'sort_order' => 4, 'active' => true],
             ];
             foreach ($counters as $c) {
@@ -156,7 +162,7 @@ class DatabaseSeeder extends Seeder
                 [3, 'What conditions do you treat at Navodayan?',       'We treat back pain, neck pain, sports injuries, post-surgery recovery, joint problems, neurological conditions, pediatric conditions, and more.'],
                 [4, 'How long does a physiotherapy session take?',       'Each session typically lasts 30 to 60 minutes depending on treatment type and your condition. Your therapist will guide you accordingly.'],
                 [5, 'How many sessions will I need?',                    'The number of sessions depends on your condition and recovery goals. We will provide a clear treatment timeline after your initial assessment.'],
-                [6, 'What are the clinic timings?',                      'Physiotherapy runs from 9:30 AM to 7:00 PM. Neuro Consultant is available 7:00 PM to 8:00 PM (Sundays by prior appointment). Clinical Psychologist and Speech & Language services are by prior appointment.'],
+                [6, 'What are the clinic timings?',                      'Physiotherapy runs from 9:30 AM to 7:00 PM. Neuro Consultation is available 7:00 PM to 8:00 PM (Sundays by prior appointment). Clinical Psychologist and Speech & Language services are by prior appointment.'],
             ];
             foreach ($faqs as [$order, $q, $a]) {
                 Faq::create(['question' => $q, 'answer' => $a, 'sort_order' => $order, 'is_active' => true]);
@@ -192,12 +198,12 @@ class DatabaseSeeder extends Seeder
             $catId = fn (string $name) => ServiceCategory::where('name', $name)->value('id');
 
             $specialties = [
-                ['Neuro Consultant',           'Neurology',      'Specialist consultation for stroke, epilepsy, headache, and complex neurological conditions.', 'services/8PCE7TH6pbq1iKT6VZSMPA7fodFcjh3NvPmPEkKX.png'],
-                ['Neuro Physiotherapy',        'Neurology',      'Focused rehabilitation for stroke, Parkinson’s, and nerve-related movement disorders.',          'services/Ez7vXZifTgO2xcQ1R4Govqeog5fdxqVYsvBngJ2t.png'],
-                ['Neuro Rehab',                'Neurology',      'Structured programs that rebuild strength, balance, and independence after neurological injury.', 'services/ZRwiQLvbIXiCM1MMLnfqxW2XskgBP9NvmOWdZin4.jpg'],
-                ['General Physiotherapy',      'Physiotherapy',  'Evidence-based care for back pain, neck pain, joint problems, and post-surgical recovery.',      'services/gmrqor1wLs4gnZsmXtKm94SHat7HwcHlNmWRWRt9.jpg'],
-                ['Clinical Psychologist',      'Allied Therapies', 'Assessment and therapy supporting recovery of mind and body together, by appointment.',        'services/obmFICCXci86nOb3Ei6klS2N9BdmaBZDlW6DQFN9.jpg'],
-                ['Speech & Language Therapy',  'Allied Therapies', 'Therapy for speech, language, and swallowing difficulties, for children and adults.',          'services/tzOvVRTCebrIFKQAzZvkiYTPmX21hlDz49QRVmrN.jpg'],
+                ['Neuro Consultation',         'Neurology',      'Specialist consultation for stroke, epilepsy, headache, and complex neurological conditions.', 'services/neuro-consultation.svg'],
+                ['Neuro Physiotherapy',        'Neurology',      'Focused rehabilitation for stroke, Parkinson’s, and nerve-related movement disorders.',          'services/neuro-physiotherapy.svg'],
+                ['Neuro Rehab',                'Neurology',      'Structured programs that rebuild strength, balance, and independence after neurological injury.', 'services/neuro-rehab.svg'],
+                ['General Physiotherapy',      'Physiotherapy',  'Evidence-based care for back pain, neck pain, joint problems, and post-surgical recovery.',      'services/general-physiotherapy.svg'],
+                ['Clinical Psychologist',      'Allied Therapies', 'Assessment and therapy supporting recovery of mind and body together, by appointment.',        'services/clinical-psychologist.svg'],
+                ['Speech & Language Therapy',  'Allied Therapies', 'Therapy for speech, language, and swallowing difficulties, for children and adults.',          'services/speech-language-therapy.svg'],
             ];
             foreach ($specialties as [$name, $cat, $desc, $img]) {
                 Service::create(['name' => $name, 'category_id' => $catId($cat), 'short_description' => $desc, 'image' => $img, 'status' => 'active']);

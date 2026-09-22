@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="page-hero page-hero--img">
-    <div class="page-hero-bg" style="background-image: url('{{ $service && $service->image ? asset('storage/' . $service->image) : asset('front_assets/images/hero-service.jpg') }}');"></div>
+    <div class="page-hero-bg" style="background-image: url('{{ $service && $service->image ? asset('storage/' . $service->image) : asset('front_assets/images/page-hero-neuro.svg') }}');"></div>
     <div class="container-p2gh">
         <div class="breadcrumb-title" data-aos="fade-down">{{ $service->name ?? 'Service Detail' }}</div>
         <nav class="breadcrumb-nav" data-aos="fade-up">
@@ -29,7 +29,7 @@
                 @endif
 
                 <div class="reveal" style="--reveal-delay:120ms;">
-                    <div class="section-label">Physiotherapy Service</div>
+                    <div class="section-label">Neurology &amp; Rehabilitation Service</div>
                     <h1 class="main-heading">{{ $service->name }}</h1>
                     <div class="content-editor">
                         {!! $service->description !!}

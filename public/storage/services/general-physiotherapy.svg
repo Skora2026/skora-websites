@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2c52"/>
+      <stop offset="100%" stop-color="#062038"/>
+    </linearGradient>
+    <linearGradient id="spineg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d9a531"/>
+      <stop offset="100%" stop-color="#9a711a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="440" fill="url(#bgg1)"/>
+  <circle cx="100" cy="360" r="150" fill="#12365f" opacity="0.5"/>
+
+  <!-- gentle spine with support hands arc -->
+  <g transform="translate(300 60)">
+    <path d="M0,0 C8,60 14,130 6,200 C0,258 -4,290 -2,330"
+          fill="none" stroke="url(#spineg1)" stroke-width="15" stroke-linecap="round"/>
+    <g fill="#eec96e" stroke="#6b4e10" stroke-width="2">
+      <g transform="rotate(-2 -2 35)"><rect x="-29" y="23" width="58" height="22" rx="8"/></g>
+      <g transform="rotate(-1 0 95)"><rect x="-28" y="83" width="56" height="22" rx="8"/></g>
+      <g transform="rotate(0 2 155)"><rect x="-27" y="143" width="54" height="22" rx="8"/></g>
+      <g transform="rotate(1 3 215)"><rect x="-26" y="203" width="52" height="22" rx="8"/></g>
+      <g transform="rotate(0 2 275)"><rect x="-24" y="263" width="48" height="22" rx="8"/></g>
+    </g>
+    <!-- supportive hands -->
+    <g fill="none" stroke="#8fbcf0" stroke-width="7" stroke-linecap="round">
+      <path d="M-70,180 C-52,166 -34,162 -20,168"/>
+      <path d="M70,180 C52,166 34,162 20,168"/>
+    </g>
+  </g>
+
+  <!-- resistance band exercise figure -->
+  <g transform="translate(480 200)" fill="#d9a531">
+    <circle cx="0" cy="-70" r="20"/>
+    <path d="M-8,-48 L10,-48 L16,0 L2,4 L-2,52 L-16,50 L-8,4 L-12,0 Z"/>
+    <path d="M-10,-44 L-46,-30 L-50,20 L-40,22 L-34,-18 L-8,-30 Z" opacity="0.9"/>
+    <path d="M12,-44 L48,-30 L52,20 L42,22 L36,-18 L10,-30 Z" opacity="0.9"/>
+  </g>
+  <path d="M420,196 C450,150 510,150 540,196" fill="none" stroke="#8fbcf0" stroke-width="6" stroke-linecap="round"/>
+
+  <path d="M60,400 L180,400 L205,372 L235,420 L262,400 L360,400"
+        fill="none" stroke="#8fbcf0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+</svg>

@@ -27,12 +27,15 @@ class AppointmentController extends Controller
             'phone' => 'required|regex:/^[6-9][0-9]{9}$/', // Indian mobile format
             'service' => 'required|string|max:255',
             'message' => 'nullable|string|max:1000',
+            'preferred_date' => 'nullable|date|after_or_equal:today',
+            'preferred_time' => 'nullable|string|max:100',
             'status' => 'nullable|in:pending,read,replied',
         ]);
         
         // Sanitize inputs
         $validated['name'] = strip_tags($validated['name']);
         $validated['message'] = strip_tags($validated['message']);
+        $validated['preferred_time'] = isset($validated['preferred_time']) ? strip_tags($validated['preferred_time']) : null;
         
         $appointment = Appointment::create($validated);
 
@@ -43,6 +46,8 @@ class AppointmentController extends Controller
             $msg = "Hi, my name is {$validated['name']}. I would like to book an appointment.\n"
                  . "Phone: {$validated['phone']}\n"
                  . "Service: {$validated['service']}\n"
+                 . "Preferred Date: " . ($validated['preferred_date'] ?? '-') . "\n"
+                 . "Preferred Time: " . ($validated['preferred_time'] ?? '-') . "\n"
                  . "Message: " . ($validated['message'] ?? '-');
             return redirect()->away("https://wa.me/{$waNumber}?text=" . urlencode($msg));
         }
@@ -61,6 +66,8 @@ class AppointmentController extends Controller
             'phone' => 'required|string|min:10|max:10',
             'service' => 'required|string|max:255',
             'message' => 'nullable|string',
+            'preferred_date' => 'nullable|date',
+            'preferred_time' => 'nullable|string|max:100',
             'status' => 'nullable|in:pending,read,replied',
 
         ]);
@@ -80,6 +87,8 @@ class AppointmentController extends Controller
             'phone' => 'required|string|min:10|max:10',
             'service' => 'required|string|max:255',
             'message' => 'nullable|string',
+            'preferred_date' => 'nullable|date',
+            'preferred_time' => 'nullable|string|max:100',
             'status' => 'nullable|in:pending,read,replied',
         ]);
 

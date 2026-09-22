@@ -130,6 +130,9 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/camps') }}" class="nav-link">Camps</a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/contact-us') }}" class="nav-link">Contact</a>
             </li>
             <li class="nav-item nav-cta-mobile">
@@ -137,6 +140,10 @@
                     <span>Book Appointment</span>
                     <span class="btn-icon">↗</span>
                 </button>
+                <a href="{{ url('/camps') }}" class="btn-p2gh btn-p2gh-outline" style="width:100%;margin-top:10px;">
+                    <span>Camps</span>
+                    <span class="btn-icon">↗</span>
+                </a>
             </li>
         </ul>
 
@@ -146,6 +153,10 @@
                 <span>Book Appointment</span>
                 <span class="btn-icon">↗</span>
             </button>
+            <a href="{{ url('/camps') }}" class="btn-p2gh btn-camps">
+                <span>Camps</span>
+                <span class="btn-icon">↗</span>
+            </a>
             @auth
                 @if(auth()->user()->role === 'admin')
                 <a href="{{ url('/admin-dashboard') }}" class="btn-p2gh btn-p2gh-outline">Dashboard</a>
@@ -214,6 +225,7 @@
                     <li><a href="{{ url('/services') }}">Services</a></li>
                     <li><a href="{{ url('/blogs') }}">Blogs</a></li>
                     <li><a href="{{ url('/gallery') }}">Gallery</a></li>
+                    <li><a href="{{ url('/camps') }}">Health Camps</a></li>
                     <li><a href="{{ url('/contact-us') }}">Contact</a></li>
                 </ul>
             </div>
@@ -298,7 +310,7 @@
         <div class="popup-header">
             <div>
                 <h3>Book Appointment</h3>
-                <p>We'll confirm your slot within 2 hours</p>
+                <p>Pick your preferred slot — our team will confirm its availability</p>
             </div>
             <button class="popup-close" id="closeForm" aria-label="Close">✕</button>
         </div>
@@ -327,6 +339,15 @@
                         <option disabled>No services available</option>
                         @endforelse
                     </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Visit Date *</label>
+                    <input type="date" name="preferred_date" id="preferredDate" class="form-control-p2gh" required min="">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Visit Time *</label>
+                    <input type="time" name="preferred_time" id="preferredTime" class="form-control-p2gh" required>
+                    <small class="form-hint">Tell us the time that suits you best — our team will contact you to confirm availability for this slot.</small>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Message (Optional)</label>
@@ -359,6 +380,8 @@
 {{-- ===== SCRIPTS ===== --}}
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <script>
 (function () {
@@ -382,6 +405,62 @@
     // ── AOS init ──────────────────────────────────────────────────
     if (window.AOS) {
         AOS.init({ duration: 750, once: true, offset: 60, easing: 'ease-out-cubic' });
+    }
+
+    // ── GSAP + ScrollTrigger on-scroll animations ─────────────────
+    var gsapOK = window.gsap && window.ScrollTrigger && !reduceMotion;
+    if (gsapOK) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Elements tagged data-gsap fade/rise as they enter the viewport
+        document.querySelectorAll('[data-gsap]').forEach(function (el) {
+            var dir = el.getAttribute('data-gsap') || 'fade-up';
+            var from = { opacity: 0, duration: 0.9, ease: 'power2.out',
+                         scrollTrigger: { trigger: el, start: 'top 86%', once: true } };
+            if (dir === 'fade-up')    from.y = 44;
+            if (dir === 'fade-left')  from.x = -44;
+            if (dir === 'fade-right') from.x = 44;
+            gsap.from(el, from);
+        });
+
+        // Stagger siblings inside [data-gsap-stagger] containers
+        document.querySelectorAll('[data-gsap-stagger]').forEach(function (container) {
+            var step = parseFloat(container.getAttribute('data-gsap-stagger')) || 0.09;
+            var kids = Array.prototype.filter.call(container.children, function (c) {
+                return !c.hasAttribute('data-gsap');
+            });
+            if (!kids.length) return;
+            gsap.from(kids, {
+                opacity: 0,
+                y: 38,
+                duration: 0.85,
+                ease: 'power2.out',
+                stagger: step,
+                scrollTrigger: { trigger: container, start: 'top 84%', once: true }
+            });
+        });
+
+        // Gentle hero entrance (runs once on load, not scroll-linked)
+        var heroBits = document.querySelectorAll('.hero-badge, .hero-title, .hero-desc, .hero-actions, .hero-stats');
+        if (heroBits.length) {
+            gsap.from(heroBits, { opacity: 0, y: 34, duration: 1, ease: 'power2.out', stagger: 0.13, delay: 0.15, clearProps: 'all' });
+        }
+        var floatCard = document.querySelector('.hero-float-card');
+        if (floatCard) {
+            gsap.from(floatCard, { opacity: 0, x: 60, duration: 1.1, ease: 'power2.out', delay: 0.7, clearProps: 'transform,opacity' });
+        }
+        // Soft continuous float on the hero credential card
+        gsap.to(floatCard || {}, { y: -10, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.8 });
+
+        // Parallax on hero background via ScrollTrigger (replaces scroll listener)
+        var heroBg = document.querySelector('.hero-bg');
+        if (heroBg) {
+            gsap.to(heroBg, {
+                yPercent: 18,
+                ease: 'none',
+                scrollTrigger: { trigger: '.p2gh-hero', start: 'top top', end: 'bottom top', scrub: true }
+            });
+        }
     }
 
     // ── Navbar scroll state ───────────────────────────────────────
@@ -451,6 +530,17 @@
     // ── Popup appointment form ────────────────────────────────────
     var popup = document.getElementById('popupForm');
     var closeBtn = document.getElementById('closeForm');
+
+    // Default the preferred date to today and block past dates
+    var prefDate = document.getElementById('preferredDate');
+    if (prefDate) {
+        var now = new Date();
+        var iso = now.getFullYear() + '-' +
+                  String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                  String(now.getDate()).padStart(2, '0');
+        prefDate.min = iso;
+        if (!prefDate.value) prefDate.value = iso;
+    }
 
     document.querySelectorAll('.openForm').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -549,24 +639,17 @@
             revealEls.forEach(function (el) { revealObserver.observe(el); });
         }
     }
-
-    // ── Subtle hero parallax (transform-only, rAF-throttled) ──────
-    var heroBg = document.querySelector('.hero-bg');
-    if (heroBg && !reduceMotion) {
-        var ticking = false;
-        window.addEventListener('scroll', function () {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(function () {
-                var y = window.scrollY;
-                if (y < window.innerHeight * 1.2) {
-                    heroBg.style.transform = 'translate3d(0,' + (y * 0.22) + 'px,0)';
-                }
-                ticking = false;
-            });
-        }, { passive: true });
-    }
 })();
+
+// ── Camp page hero entrance (GSAP) ────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var campTitle = document.querySelector('[data-camp-hero-title]');
+    if (campTitle && window.gsap && !reduce) {
+        gsap.from(campTitle, { opacity: 0, y: 40, duration: 1, ease: 'power2.out', delay: 0.1 });
+        gsap.from('.camps-hero .breadcrumb-nav, .camps-hero-desc', { opacity: 0, y: 24, duration: 0.9, ease: 'power2.out', stagger: 0.15, delay: 0.35 });
+    }
+});
 </script>
 
 @stack('scripts')

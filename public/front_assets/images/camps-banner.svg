@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="cbg" cx="50%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#0f3a6e"/>
+      <stop offset="60%" stop-color="#081a30"/>
+      <stop offset="100%" stop-color="#050f1d"/>
+    </radialGradient>
+    <linearGradient id="tent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8fbcf0"/>
+      <stop offset="100%" stop-color="#2f5da8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="520" fill="url(#cbg)"/>
+  <ellipse cx="800" cy="140" rx="700" ry="220" fill="#143d70" opacity="0.3"/>
+  <g fill="#8fbcf0" opacity="0.18">
+    <circle cx="200" cy="110" r="3"/><circle cx="360" cy="70" r="2.5"/>
+    <circle cx="1280" cy="90" r="3"/><circle cx="1420" cy="150" r="2.5"/>
+  </g>
+
+  <!-- camp tent -->
+  <g transform="translate(800 330)">
+    <path d="M0,-190 L240,60 L-240,60 Z" fill="url(#tent)"/>
+    <path d="M0,-190 L0,60" stroke="#0a2547" stroke-width="6"/>
+    <path d="M0,-190 L240,60" stroke="#0a2547" stroke-width="4" opacity="0.4"/>
+    <rect x="-18" y="-210" width="36" height="24" rx="4" fill="#d9a531"/>
+    <!-- door -->
+    <path d="M-52,60 C-52,6 -24,-24 0,-24 C24,-24 52,6 52,60 Z" fill="#062038"/>
+    <!-- medical cross on tent -->
+    <g fill="#fff" opacity="0.92">
+      <rect x="-13" y="-140" width="26" height="76" rx="5"/>
+      <rect x="-38" y="-115" width="76" height="26" rx="5"/>
+    </g>
+  </g>
+
+  <!-- ground line -->
+  <path d="M100,392 L1500,392" stroke="#8fbcf0" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round"/>
+  <g stroke="#d9a531" stroke-width="3" opacity="0.65" stroke-linecap="round">
+    <path d="M240,392 l-30,40"/><path d="M1370,392 l30,40"/>
+  </g>
+</svg>

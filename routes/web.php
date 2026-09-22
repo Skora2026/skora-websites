@@ -23,6 +23,7 @@ use App\Http\Controllers\GalleryCategoryController;
 use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\CampController;
 
 /* ───────────────────────────────────────────────
    PUBLIC ROUTES
@@ -35,6 +36,7 @@ Route::get('/blogs',     [FrontController::class, 'frontendIndexblogss'])->name(
 Route::get('/blog-details/{slug}', [FrontController::class, 'showDetailsa_of_blogs'])->name('blog.show');
 Route::get('/gallery',   [FrontController::class, 'galleryload'])->name('gallery');
 Route::get('/video',     [FrontController::class, 'videoPage'])->name('video');
+Route::get('/camps',     [CampController::class, 'index'])->name('camps');
 
 Route::match(['get','post'], '/contact-us', [ContactController::class, 'index'])->name('contact-us');
 Route::post('/contact',  [ContactController::class, 'store'])->name('contact.store');
@@ -180,6 +182,15 @@ Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->group(function ()
     Route::get('/get-resumes',            [MasterController::class, 'getResumes'])->name('admin.resumes.get');
     Route::post('/update-resume/{id}',    [MasterController::class, 'updateresume'])->name('admin.resumes.update');
     Route::delete('/delete-resume/{id}',  [MasterController::class, 'destroyresume'])->name('admin.resumes.delete');
+
+    // ── Camps ─────────────────────────────────────────────────────
+    Route::get('/manage-camps',    [CampController::class, 'adminIndex'])->name('admin.camps');
+    Route::get('/get-camps',       [CampController::class, 'getData'])->name('admin.camps.get');
+    Route::post('/save-camp',      [CampController::class, 'store'])->name('admin.camps.store');
+    Route::post('/update-camp/{id}', [CampController::class, 'update'])->name('admin.camps.update');
+    Route::delete('/delete-camp/{id}', [CampController::class, 'destroy'])->name('admin.camps.destroy');
+
+    Route::post('/camps/bulk-delete',      [CampController::class, 'bulkDelete'])->name('admin.camps.bulk-delete');
 
     // ── FAQs (NEW) ────────────────────────────────────────────────
     Route::get('/manage-faqs',          [FaqController::class, 'index'])->name('admin.faqs');

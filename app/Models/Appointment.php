@@ -15,6 +15,12 @@ class Appointment extends Model
         'phone',
         'service',
         'message',
+        'preferred_date',
+        'preferred_time',
         'status',
+    ];
+
+    protected $casts = [
+        'preferred_date' => 'date:Y-m-d',
     ];
 }

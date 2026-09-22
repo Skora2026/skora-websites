@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="phbg" cx="50%" cy="28%" r="95%">
+      <stop offset="0%" stop-color="#0f3a6e"/>
+      <stop offset="58%" stop-color="#081a30"/>
+      <stop offset="100%" stop-color="#050f1d"/>
+    </radialGradient>
+    <linearGradient id="phbrain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8fbcf0"/>
+      <stop offset="100%" stop-color="#2f5da8"/>
+    </linearGradient>
+    <pattern id="phgrid" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0H0V46" fill="none" stroke="#8fbcf0" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="520" fill="url(#phbg)"/>
+  <rect width="1600" height="520" fill="url(#phgrid)"/>
+  <ellipse cx="800" cy="130" rx="720" ry="230" fill="#143d70" opacity="0.28"/>
+
+  <!-- left brain -->
+  <g transform="translate(240 270)" opacity="0.85">
+    <path d="M-120,36 C-148,-8 -140,-66 -96,-98 C-64,-122 -22,-132 14,-128
+             C74,-134 138,-102 156,-44 C170,6 156,54 114,80
+             C78,102 24,108 -18,98 C-60,90 -100,66 -120,36 Z" fill="url(#phbrain)" opacity="0.9"/>
+    <g fill="none" stroke="#0a2547" stroke-width="5" stroke-linecap="round" opacity="0.45">
+      <path d="M-92,-40 C-72,-56 -50,-52 -40,-34 C-31,-17 -41,-2 -58,2"/>
+      <path d="M8,-108 C32,-94 36,-66 20,-47 C5,-31 -16,-34 -26,-22"/>
+      <path d="M58,-86 C88,-77 102,-50 90,-24 C81,-5 58,-1 45,-9"/>
+      <path d="M98,-14 C122,-4 124,24 106,44 C92,59 70,55 63,40"/>
+      <path d="M-8,42 C16,34 40,44 42,66 C44,82 31,94 13,94"/>
+    </g>
+  </g>
+
+  <!-- right spine -->
+  <g transform="translate(1330 60)" opacity="0.85">
+    <path d="M0,0 C10,70 16,150 8,230 C2,290 -2,330 -2,380"
+          fill="none" stroke="#d9a531" stroke-width="14" stroke-linecap="round"/>
+    <g fill="#eec96e" stroke="#6b4e10" stroke-width="2">
+      <g transform="rotate(-3 0 45)"><rect x="-27" y="33" width="54" height="21" rx="8"/></g>
+      <g transform="rotate(-1 0 110)"><rect x="-26" y="98" width="52" height="21" rx="8"/></g>
+      <g transform="rotate(1 2 175)"><rect x="-25" y="163" width="50" height="21" rx="8"/></g>
+      <g transform="rotate(1 2 240)"><rect x="-24" y="228" width="48" height="21" rx="8"/></g>
+      <g transform="rotate(0 1 305)"><rect x="-23" y="293" width="46" height="21" rx="8"/></g>
+      <g transform="rotate(-1 0 370)"><rect x="-22" y="358" width="44" height="21" rx="8"/></g>
+    </g>
+  </g>
+
+  <!-- connecting pulse -->
+  <path d="M430,290 C640,240 960,240 1240,285" fill="none" stroke="#8fbcf0" stroke-opacity="0.35" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round"/>
+  <g fill="#d9a531">
+    <circle cx="700" cy="252" r="5"/><circle cx="950" cy="248" r="5"/>
+  </g>
+</svg>

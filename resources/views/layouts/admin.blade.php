@@ -77,6 +77,16 @@
             </li>
 
 
+             <li class="{{ request()->routeIs('admin.camps*') ? 'active' : '' }}">
+                <a class="nav-link d-flex align-items-center py-2
+                    {{ request()->routeIs('admin.camps*') ? 'active' : '' }}"
+                href="{{ route('admin.camps') }}">
+                    <i class="bi bi-clipboard2-heart me-3"></i>
+                    <span class="menu-text">Camps</span>
+                </a>
+            </li>
+
+
  
 
 

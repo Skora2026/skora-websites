@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgp1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2c52"/>
+      <stop offset="100%" stop-color="#062038"/>
+    </linearGradient>
+    <linearGradient id="brainp1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8fbcf0"/>
+      <stop offset="100%" stop-color="#2f5da8"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="440" fill="url(#bgp1)"/>
+  <circle cx="110" cy="70" r="150" fill="#12365f" opacity="0.5"/>
+
+  <!-- brain -->
+  <g transform="translate(230 170)">
+    <path d="M-100,30 C-122,-8 -115,-58 -80,-86 C-54,-106 -20,-116 12,-112
+             C62,-118 116,-90 132,-38 C143,14 130,56 94,78
+             C64,96 18,102 -20,92 C-55,84 -84,62 -100,30 Z" fill="url(#brainp1)"/>
+    <g fill="none" stroke="#0a2547" stroke-width="4" stroke-linecap="round" opacity="0.45">
+      <path d="M-78,-36 C-60,-50 -40,-46 -32,-30 C-24,-14 -33,0 -48,3"/>
+      <path d="M6,-100 C26,-88 30,-64 16,-47 C3,-33 -15,-36 -24,-26"/>
+      <path d="M50,-82 C75,-74 88,-52 78,-30 C71,-14 52,-10 40,-17"/>
+      <path d="M88,-16 C107,-7 108,17 94,33 C82,46 64,42 58,29"/>
+      <path d="M-8,38 C12,32 32,41 34,60 C36,74 25,84 10,84"/>
+    </g>
+    <path d="M-15,-108 C-24,-74 -20,-32 -31,8" fill="none" stroke="#0a2547" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  </g>
+
+  <!-- nerve signal going down the arm to a moving body -->
+  <path d="M320,240 C370,270 400,310 405,355" fill="none" stroke="#8fbcf0" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="round"/>
+
+  <!-- walking figure (mobility regained) -->
+  <g transform="translate(470 250)" fill="#d9a531">
+    <circle cx="0" cy="-60" r="20"/>
+    <path d="M-6,-38 L8,-38 L14,10 L2,14 L-4,60 L-16,58 L-8,12 L-14,8 Z"/>
+    <path d="M-6,-34 L-30,-6 L-38,20 L-28,24 L-20,2 L-4,-14 Z" opacity="0.9"/>
+    <path d="M8,-34 L34,-12 L28,10 L14,4 L6,-12 Z" opacity="0.9"/>
+  </g>
+
+  <!-- motion arcs -->
+  <g fill="none" stroke="#8fbcf0" stroke-width="4" stroke-linecap="round" opacity="0.7">
+    <path d="M540,180 A90,90 0 0 1 560,250"/>
+    <path d="M560,150 A120,120 0 0 1 588,250"/>
+  </g>
+
+  <path d="M60,400 L180,400 L205,372 L235,420 L262,400 L360,400"
+        fill="none" stroke="#d9a531" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+</svg>

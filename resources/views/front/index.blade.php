@@ -6,7 +6,7 @@
 
 {{-- ===== HERO ===== --}}
 <section class="p2gh-hero">
-    <div class="hero-bg" style="background-image: url('{{ $hero && $hero->image ? asset('storage/'.$hero->image) : asset('front_assets/images/home-banner.jpg') }}');"></div>
+    <div class="hero-bg" style="background-image: url('{{ $hero && $hero->image ? asset('storage/'.$hero->image) : asset('front_assets/images/hero-neuro-brain-spine.svg') }}');"></div>
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
@@ -17,12 +17,12 @@
             </div>
 
             <h1 class="hero-title">
-                {{ $hero && $hero->heading ? $hero->heading : 'Move Without Pain.' }}
-                <span class="line2">{{ $hero && $hero->subheading ? $hero->subheading : 'Live Without Limits.' }}</span>
+                {{ $hero && $hero->heading ? $hero->heading : 'Restoring Brain' }}
+                <span class="line2">{{ $hero && $hero->subheading ? $hero->subheading : 'And Spine Health.' }}</span>
             </h1>
 
             <p class="hero-desc reveal" style="--reveal-delay:120ms;">
-                {{ $hero && $hero->description ? $hero->description : 'Expert physiotherapy care available round the clock. Our certified therapists help you recover faster, move better, and live pain-free — every single day.' }}
+                {{ $hero && $hero->description ? $hero->description : 'Specialist neuro consultations, neuro physiotherapy and rehabilitation for stroke, spine and nerve conditions — precise diagnosis, personal recovery plans, and compassionate care at every step.' }}
             </p>
 
             <div class="hero-actions reveal" style="--reveal-delay:220ms;">
@@ -56,8 +56,8 @@
     <div class="hero-float-card reveal reveal-right" style="--reveal-delay:500ms;">
         <div class="hero-float-icon"><i class="bi bi-heart-pulse-fill"></i></div>
         <div class="hero-float-text">
-            <strong>{{ $hero?->floating_title ?? 'Expert Therapists' }}</strong>
-            <span>{{ $hero?->floating_subtitle ?? 'Expert Neuro Rehabilitation Team' }}</span>
+            <strong>{{ $hero?->floating_title ?? 'Neuro Expertise' }}</strong>
+            <span>{{ $hero?->floating_subtitle ?? 'Brain & Spine Rehabilitation Team' }}</span>
         </div>
     </div>
 </section>
@@ -122,16 +122,16 @@
             <div class="about-images-wrap reveal-img reveal" style="--reveal-delay:150ms;">
                 <div class="about-img-main">
                     @if($aboutsection && $aboutsection->center_image)
-                        <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'P2GH' }} Physiotherapy">
+                        <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'Navodayan' }} Neuro Care">
                     @else
-                        <img src="{{ asset('front_assets/images/aa.jpeg') }}" alt="Navodayan Neuroclinic & Neurorehab">
+                        <img src="{{ asset('front_assets/images/about-neuro-care.svg') }}" alt="Brain and spine care at Navodayan Neuroclinic & Neurorehab">
                     @endif
                 </div>
                 <div class="about-img-small">
                     @if($aboutsection && $aboutsection->small_image)
                         <img src="{{ asset('storage/'.$aboutsection->small_image) }}" alt="Therapy">
                     @else
-                        <img src="{{ asset('front_assets/images/aaa.jpeg') }}" alt="Therapy">
+                        <img src="{{ asset('front_assets/images/about-neuron-network.svg') }}" alt="Neuron network">
                     @endif
                 </div>
                 <div class="about-exp-badge">
@@ -196,7 +196,7 @@
             </a>
         </div>
 
-        <div class="services-grid">
+        <div class="services-grid" data-gsap-stagger="0.09">
             @foreach($indexservices as $service)
             <div class="service-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 90 }}">
                 <a href="{{ route('service.detail', $service->slug) }}">
@@ -251,9 +251,8 @@
                     @else
                         Excellence In <span>Care</span> And Rehabilitation
                     @endif
-                </h2>
-                <p class="section-desc" style="margin-bottom:8px;">
-                    We combine expert physiotherapy with personalized treatment plans so you get lasting recovery, not just temporary relief.
+                </h2>                    <p class="section-desc" style="margin-bottom:8px;">
+                    We combine expert neuro care with personalized rehabilitation plans so you get lasting recovery, not just temporary relief.
                 </p>
 
                 <div class="why-list">
@@ -324,7 +323,7 @@
             <h2 class="main-heading">
                 {{ $processSteps->count() }} Simple Steps To <span>Begin Your Recovery</span>
             </h2>
-            <p class="section-desc">Getting physiotherapy care at {{ settings('company_short_name') ?? 'P2GH' }} is straightforward. Book, assess, and recover — we handle everything else.</p>
+            <p class="section-desc">Getting neuro & rehabilitation care at {{ settings('company_short_name') ?? 'Navodayan' }} is straightforward. Book, assess, and recover — we handle everything else.</p>
         </div>
 
         @php $psCols = min($processSteps->count(), 3); @endphp
@@ -354,7 +353,7 @@
         <div class="section-header-center" data-aos="fade-up">
             <div class="section-label">Patient Reviews</div>
             <h2 class="main-heading">What Our <span>Patients</span> Say</h2>
-            <p class="section-desc">Real recovery stories from real patients. Hear how {{ settings('company_short_name') ?? 'P2GH' }} has helped people get back to living fully.</p>
+            <p class="section-desc">Real recovery stories from real patients. Hear how {{ settings('company_short_name') ?? 'Navodayan' }} has helped people get back to living fully.</p>
         </div>
 
         <div class="swiper testimonial-slider">
@@ -405,7 +404,7 @@
             </a>
         </div>
 
-        <div class="blog-grid has-featured">
+        <div class="blog-grid has-featured" data-gsap-stagger="0.1">
             @foreach($blogs as $blog)
             <div class="blog-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 90 }}">
                 <a href="{{ url('/blog-details/'.$blog->slug) }}">

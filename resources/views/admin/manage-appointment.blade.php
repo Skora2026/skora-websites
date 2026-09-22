@@ -35,6 +35,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Service</th>
+                        <th>Preferred Slot</th>
                         <th>Message</th>
                         <th>Status</th>
                         <th width="15%">Actions</th>
@@ -87,6 +88,14 @@
                             <option value="Pediatric Physiotherapy">Pediatric Physiotherapy</option>
                         </select>
                         <div class="invalid-feedback">Please select service</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Preferred Date</label>
+                        <input type="date" class="form-control" name="preferred_date" id="addAppointmentDate">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Preferred Time</label>
+                        <input type="text" class="form-control" name="preferred_time" id="addAppointmentTime" placeholder="e.g. 10:30 AM">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Message</label>
@@ -152,6 +161,14 @@
                             <option value="Pediatric Physiotherapy">Pediatric Physiotherapy</option>
                         </select>
                         <div class="invalid-feedback">Please select service</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Preferred Date</label>
+                        <input type="date" class="form-control" name="preferred_date" id="editAppointmentDate">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Preferred Time</label>
+                        <input type="text" class="form-control" name="preferred_time" id="editAppointmentTime" placeholder="e.g. 10:30 AM">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Message</label>
@@ -266,6 +283,15 @@
                     { data: 'email' },
                     { data: 'phone' },
                     { data: 'service' },
+                    { 
+                        data: null,
+                        render: function(data, type, row) {
+                            if (!row.preferred_date && !row.preferred_time) return '<span class="text-muted">—</span>';
+                            var d = row.preferred_date || '';
+                            var t = row.preferred_time || '';
+                            return '<span class="badge bg-light text-dark border">' + d + (t ? ' · ' + t : '') + '</span>';
+                        }
+                    },
                     { 
                         data: 'message',
                         render: function(data) {
@@ -395,6 +421,8 @@
                 $('#editAppointmentEmail').val(appointment.email);
                 $('#editAppointmentPhone').val(appointment.phone);
                 $('#editAppointmentService').val(appointment.service);
+                $('#editAppointmentDate').val(appointment.preferred_date || '');
+                $('#editAppointmentTime').val(appointment.preferred_time || '');
                 $('#editAppointmentMessage').val(appointment.message);
                 $('#editAppointmentStatus').val(appointment.status);
                 $('#editAppointmentForm .is-invalid').removeClass('is-invalid');
