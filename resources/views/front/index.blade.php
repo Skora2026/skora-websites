@@ -6,7 +6,11 @@
 
 {{-- ===== HERO ===== --}}
 <section class="p2gh-hero">
-    <div class="hero-bg" style="background-image: url('{{ $hero && $hero->image ? asset('storage/'.$hero->image) : asset('front_assets/images/hero-neuro-brain-spine.svg') }}');"></div>
+    {{-- Background photo carousel: neurosurgeon first, then physiotherapy --}}
+    <div class="hero-carousel" aria-hidden="true">
+        <div class="hero-slide is-active" style="background-image: url('{{ $hero && $hero->image ? asset('storage/'.$hero->image) : asset('front_assets/images/hero-slide-neuro.jpg') }}');"></div>
+        <div class="hero-slide" style="background-image: url('{{ asset('front_assets/images/hero-slide-physio.jpg') }}');"></div>
+    </div>
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
@@ -124,14 +128,14 @@
                     @if($aboutsection && $aboutsection->center_image)
                         <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'Navodayan' }} Neuro Care">
                     @else
-                        <img src="{{ asset('front_assets/images/about-neuro-care.svg') }}" alt="Brain and spine care at Navodayan Neuroclinic & Neurorehab">
+                        <img src="{{ asset('front_assets/images/about-main.jpg') }}" alt="Brain and spine care at Navodayan Neuroclinic & Neurorehab">
                     @endif
                 </div>
                 <div class="about-img-small">
                     @if($aboutsection && $aboutsection->small_image)
                         <img src="{{ asset('storage/'.$aboutsection->small_image) }}" alt="Therapy">
                     @else
-                        <img src="{{ asset('front_assets/images/about-neuron-network.svg') }}" alt="Neuron network">
+                        <img src="{{ asset('front_assets/images/about-inset-lab.jpg') }}" alt="Neuron network">
                     @endif
                 </div>
                 <div class="about-exp-badge">
@@ -196,7 +200,7 @@
             </a>
         </div>
 
-        <div class="services-grid" data-gsap-stagger="0.09">
+        <div class="services-grid">
             @foreach($indexservices as $service)
             <div class="service-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 90 }}">
                 <a href="{{ route('service.detail', $service->slug) }}">
@@ -404,7 +408,7 @@
             </a>
         </div>
 
-        <div class="blog-grid has-featured" data-gsap-stagger="0.1">
+        <div class="blog-grid has-featured">
             @foreach($blogs as $blog)
             <div class="blog-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 90 }}">
                 <a href="{{ url('/blog-details/'.$blog->slug) }}">
@@ -458,3 +462,27 @@
 @endif
 
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    'use strict';
+    var slides = document.querySelectorAll('.hero-carousel .hero-slide');
+    if (slides.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        slides.forEach(function (s, i) { s.classList.toggle('is-active', i === 0); });
+        return;
+    }
+    var current = 0;
+    setInterval(function () {
+        var prev = slides[current];
+        current = (current + 1) % slides.length;
+        var next = slides[current];
+        prev.classList.remove('is-active');
+        prev.classList.add('is-leaving');
+        next.classList.add('is-active');
+        setTimeout(function () { prev.classList.remove('is-leaving'); }, 1500);
+    }, 6000);
+})();
+</script>
+@endpush

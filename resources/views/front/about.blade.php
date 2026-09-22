@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="page-hero page-hero--img">
-    <div class="page-hero-bg" style="background-image: url('{{ asset('front_assets/images/page-hero-neuro.svg') }}');"></div>
+    <div class="page-hero-bg" style="background-image: url('{{ asset('front_assets/images/page-hero-photo.jpg') }}');"></div>
     <div class="container-p2gh">
         <div class="breadcrumb-title" data-aos="fade-down">About Us</div>
         <nav class="breadcrumb-nav" data-aos="fade-up">
@@ -76,14 +76,14 @@
                     @if($aboutsection && $aboutsection->center_image)
                         <img src="{{ asset('storage/'.$aboutsection->center_image) }}" alt="{{ settings('company_short_name') ?? 'Navodayan' }} Neuro Care">
                     @else
-                        <img src="{{ asset('front_assets/images/about-neuro-care.svg') }}" alt="Brain and spine care at Navodayan Neuroclinic & Neurorehab">
+                        <img src="{{ asset('front_assets/images/about-main.jpg') }}" alt="Brain and spine care at Navodayan Neuroclinic & Neurorehab">
                     @endif
                 </div>
                 <div class="about-img-small">
                     @if($aboutsection && $aboutsection->small_image)
                         <img src="{{ asset('storage/'.$aboutsection->small_image) }}" alt="Therapy">
                     @else
-                        <img src="{{ asset('front_assets/images/about-neuron-network.svg') }}" alt="Neuron network">
+                        <img src="{{ asset('front_assets/images/about-inset-lab.jpg') }}" alt="Neuron network">
                     @endif
                 </div>
                 <div class="about-exp-badge">

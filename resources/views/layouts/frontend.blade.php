@@ -402,58 +402,41 @@
     syncTopbarHeight();
     window.addEventListener('resize', syncTopbarHeight);
 
-    // ── AOS init ──────────────────────────────────────────────────
-    if (window.AOS) {
+    // ── AOS init (single scroll-reveal system for sections/cards) ─
+    // If the AOS lib fails to load (CDN blocked) or the user prefers reduced
+    // motion, strip the data-aos attributes so nothing stays hidden forever.
+    function stripAos() {
+        document.querySelectorAll('[data-aos]').forEach(function (el) { el.removeAttribute('data-aos'); });
+    }
+    if (reduceMotion) {
+        stripAos();
+    } else if (window.AOS) {
         AOS.init({ duration: 750, once: true, offset: 60, easing: 'ease-out-cubic' });
+        // Failsafe: never leave content hidden. If anything is still not
+        // revealed 4s after load (slow CDN, edge-case bugs), force-reveal it.
+        setTimeout(function () {
+            document.querySelectorAll('[data-aos]:not(.aos-animate)').forEach(function (el) {
+                var r = el.getBoundingClientRect();
+                if (r.top < window.innerHeight && r.height > 0) el.classList.add('aos-animate');
+            });
+        }, 4000);
+    } else {
+        stripAos();
     }
 
-    // ── GSAP + ScrollTrigger on-scroll animations ─────────────────
+    // ── GSAP — hero-only polish (no competing scroll reveals) ─────
     var gsapOK = window.gsap && window.ScrollTrigger && !reduceMotion;
     if (gsapOK) {
         gsap.registerPlugin(ScrollTrigger);
-
-        // Elements tagged data-gsap fade/rise as they enter the viewport
-        document.querySelectorAll('[data-gsap]').forEach(function (el) {
-            var dir = el.getAttribute('data-gsap') || 'fade-up';
-            var from = { opacity: 0, duration: 0.9, ease: 'power2.out',
-                         scrollTrigger: { trigger: el, start: 'top 86%', once: true } };
-            if (dir === 'fade-up')    from.y = 44;
-            if (dir === 'fade-left')  from.x = -44;
-            if (dir === 'fade-right') from.x = 44;
-            gsap.from(el, from);
-        });
-
-        // Stagger siblings inside [data-gsap-stagger] containers
-        document.querySelectorAll('[data-gsap-stagger]').forEach(function (container) {
-            var step = parseFloat(container.getAttribute('data-gsap-stagger')) || 0.09;
-            var kids = Array.prototype.filter.call(container.children, function (c) {
-                return !c.hasAttribute('data-gsap');
-            });
-            if (!kids.length) return;
-            gsap.from(kids, {
-                opacity: 0,
-                y: 38,
-                duration: 0.85,
-                ease: 'power2.out',
-                stagger: step,
-                scrollTrigger: { trigger: container, start: 'top 84%', once: true }
-            });
-        });
 
         // Gentle hero entrance (runs once on load, not scroll-linked)
         var heroBits = document.querySelectorAll('.hero-badge, .hero-title, .hero-desc, .hero-actions, .hero-stats');
         if (heroBits.length) {
             gsap.from(heroBits, { opacity: 0, y: 34, duration: 1, ease: 'power2.out', stagger: 0.13, delay: 0.15, clearProps: 'all' });
         }
-        var floatCard = document.querySelector('.hero-float-card');
-        if (floatCard) {
-            gsap.from(floatCard, { opacity: 0, x: 60, duration: 1.1, ease: 'power2.out', delay: 0.7, clearProps: 'transform,opacity' });
-        }
-        // Soft continuous float on the hero credential card
-        gsap.to(floatCard || {}, { y: -10, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.8 });
 
         // Parallax on hero background via ScrollTrigger (replaces scroll listener)
-        var heroBg = document.querySelector('.hero-bg');
+        var heroBg = document.querySelector('.hero-carousel') || document.querySelector('.hero-bg');
         if (heroBg) {
             gsap.to(heroBg, {
                 yPercent: 18,
@@ -641,15 +624,7 @@
     }
 })();
 
-// ── Camp page hero entrance (GSAP) ────────────────────────────────
-document.addEventListener('DOMContentLoaded', function () {
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var campTitle = document.querySelector('[data-camp-hero-title]');
-    if (campTitle && window.gsap && !reduce) {
-        gsap.from(campTitle, { opacity: 0, y: 40, duration: 1, ease: 'power2.out', delay: 0.1 });
-        gsap.from('.camps-hero .breadcrumb-nav, .camps-hero-desc', { opacity: 0, y: 24, duration: 0.9, ease: 'power2.out', stagger: 0.15, delay: 0.35 });
-    }
-});
+
 </script>
 
 @stack('scripts')

@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="page-hero page-hero--img">
-    <div class="page-hero-bg" style="background-image: url('{{ asset('front_assets/images/page-hero-neuro.svg') }}');"></div>
+    <div class="page-hero-bg" style="background-image: url('{{ asset('front_assets/images/page-hero-photo.jpg') }}');"></div>
     <div class="container-p2gh">
         <div class="breadcrumb-title" data-aos="fade-down">Our Services</div>
         <nav class="breadcrumb-nav" data-aos="fade-up">
@@ -29,7 +29,7 @@
             @foreach($categories as $category)
             <div class="service-category-block">
                 <h3 class="service-category-title">{{ $category->name }}</h3>
-                <div class="services-list-grid" data-gsap-stagger="0.09">
+                <div class="services-list-grid">
                     @foreach($category->services as $service)
                     <div class="service-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 80 }}">
                         <a href="{{ url('/service-details/' . $service->slug) }}">
@@ -53,7 +53,7 @@
             </div>
             @endforeach
         @else
-        <div class="services-list-grid" data-gsap-stagger="0.09">
+        <div class="services-list-grid">
             @forelse($services as $service)
             <div class="service-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 80 }}">
                 <a href="{{ url('/service-details/' . $service->slug) }}">

@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="page-hero page-hero--img">
-    <div class="page-hero-bg" style="background-image: url('{{ $service && $service->image ? asset('storage/' . $service->image) : asset('front_assets/images/page-hero-neuro.svg') }}');"></div>
+    <div class="page-hero-bg" style="background-image: url('{{ $service && $service->image ? asset('storage/' . $service->image) : asset('front_assets/images/page-hero-photo.jpg') }}');"></div>
     <div class="container-p2gh">
         <div class="breadcrumb-title" data-aos="fade-down">{{ $service->name ?? 'Service Detail' }}</div>
         <nav class="breadcrumb-nav" data-aos="fade-up">

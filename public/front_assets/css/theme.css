@@ -556,6 +556,30 @@ html.nav-prescroll .p2gh-navbar.transparent .nav-toggle span { background: var(-
   will-change: transform;
 }
 
+/* Hero background photo carousel (neurosurgeon -> physio) */
+.hero-carousel {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero-carousel .hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 1.4s ease, transform 7s linear;
+}
+.hero-carousel .hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+.hero-carousel .hero-slide.is-leaving {
+  opacity: 0;
+  transform: scale(1.02);
+}
+
 /* Cinematic editorial overlay — the single allowed gradient */
 .hero-overlay {
   position: absolute;
@@ -680,10 +704,10 @@ html.nav-prescroll .p2gh-navbar.transparent .nav-toggle span { background: var(-
   margin-top: 8px;
 }
 
-/* Keep the brain & spine artwork in frame on narrow screens
-   (the illustration sits in the right third of the SVG) */
+/* Keep the photo subject in frame on narrow screens */
 @media (max-width: 900px) {
-  .hero-bg { background-position: 74% center; }
+  .hero-bg,
+  .hero-carousel .hero-slide { background-position: 62% center; }
   .camps-hero .page-hero-bg { background-position: center 42%; }
 }
 
