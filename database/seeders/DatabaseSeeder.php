@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
                 'button_text' => 'Know More',
                 'button_link' => '/about-us',
                 'doctor_name' => 'Dr. Rajpal',
-                'center_image'=> 'default.jpg',
+                'center_image'=> 'front_assets/images/about-main.jpg',
             ]);
         }
 
@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
             WhyChooseUsSection::create([
                 'sub_title'   => 'Why Choose Us',
                 'main_title'  => 'Excellence In <span>Neuro Care</span> And Rehabilitation',
-                'right_image' => 'default.jpg',
+                'right_image' => 'front_assets/images/about-inset-lab.jpg',
                 'features'    => [
                     ['title' => 'Experienced Team',         'description' => 'Certified neuro specialists and therapists committed to quality care and your complete recovery.', 'icon' => 'people'],
                     ['title' => 'Patient-Centered Approach','description' => 'Every treatment plan is customized around your unique condition and recovery goals.', 'icon' => 'heart-pulse'],
@@ -198,12 +198,12 @@ class DatabaseSeeder extends Seeder
             $catId = fn (string $name) => ServiceCategory::where('name', $name)->value('id');
 
             $specialties = [
-                ['Neuro Consultation',         'Neurology',      'Specialist consultation for stroke, epilepsy, headache, and complex neurological conditions.', 'services/neuro-consultation.svg'],
-                ['Neuro Physiotherapy',        'Neurology',      'Focused rehabilitation for stroke, Parkinson’s, and nerve-related movement disorders.',          'services/neuro-physiotherapy.svg'],
-                ['Neuro Rehab',                'Neurology',      'Structured programs that rebuild strength, balance, and independence after neurological injury.', 'services/neuro-rehab.svg'],
-                ['General Physiotherapy',      'Physiotherapy',  'Evidence-based care for back pain, neck pain, joint problems, and post-surgical recovery.',      'services/general-physiotherapy.svg'],
-                ['Clinical Psychologist',      'Allied Therapies', 'Assessment and therapy supporting recovery of mind and body together, by appointment.',        'services/clinical-psychologist.svg'],
-                ['Speech & Language Therapy',  'Allied Therapies', 'Therapy for speech, language, and swallowing difficulties, for children and adults.',          'services/speech-language-therapy.svg'],
+                ['Neuro Consultation',         'Neurology',      'Specialist consultation for stroke, epilepsy, headache, and complex neurological conditions.', 'front_assets/images/svc-neuro-consultation.jpg'],
+                ['Neuro Physiotherapy',        'Neurology',      'Focused rehabilitation for stroke, Parkinson’s, and nerve-related movement disorders.',          'front_assets/images/svc-neuro-physiotherapy.jpg'],
+                ['Neuro Rehab',                'Neurology',      'Structured programs that rebuild strength, balance, and independence after neurological injury.', 'front_assets/images/svc-neuro-rehabilitation.jpg'],
+                ['General Physiotherapy',      'Physiotherapy',  'Evidence-based care for back pain, neck pain, joint problems, and post-surgical recovery.',      'front_assets/images/svc-general-physiotherapy.jpg'],
+                ['Clinical Psychologist',      'Allied Therapies', 'Assessment and therapy supporting recovery of mind and body together, by appointment.',        'front_assets/images/svc-clinical-psychologist.jpg'],
+                ['Speech & Language Therapy',  'Allied Therapies', 'Therapy for speech, language, and swallowing difficulties, for children and adults.',          'front_assets/images/svc-speech-language-therapy.jpg'],
             ];
             foreach ($specialties as [$name, $cat, $desc, $img]) {
                 Service::create(['name' => $name, 'category_id' => $catId($cat), 'short_description' => $desc, 'image' => $img, 'status' => 'active']);

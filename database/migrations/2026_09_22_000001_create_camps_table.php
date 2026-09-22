@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('camp_time')->nullable();
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

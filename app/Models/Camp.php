@@ -17,6 +17,7 @@ class Camp extends Model
         'camp_time',
         'is_active',
         'sort_order',
+        'image',
     ];
 
     protected $casts = ['is_active' => 'boolean'];
