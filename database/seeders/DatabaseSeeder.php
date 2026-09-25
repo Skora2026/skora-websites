@@ -23,16 +23,40 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Strong admin password (replace or move to env in production).
+     * Previous insecure default '11111111' has been retired.
+     */
+    public const ADMIN_PASSWORD = '6df2085f7e506167ae-f0564de27429fde67c-e0cc098f96578afa76';
+
+    public const ADMIN_EMAIL = 'swatantra.stf003@gmail.com';
+
     public function run(): void
     {
         // ── Admin User ─────────────────────────────────────────────
-        if (!User::where('email', 'swatantra.stf003@gmail.com')->exists()) {
+        if (!User::where('email', self::ADMIN_EMAIL)->exists()) {
             User::create([
-                'name'     => 'P2GH Admin',
-                'email'    => 'swatantra.stf003@gmail.com',
-                'password' => Hash::make('11111111'),
+                'name'     => 'Navodayan Admin',
+                'email'    => self::ADMIN_EMAIL,
+                'password' => self::ADMIN_PASSWORD, // hashed automatically via User model cast
                 'role'     => 'admin',
             ]);
+        }
+
+        // ── Rotate away from the old insecure default password ────
+        // Fresh installs are covered above; this upgrades any existing
+        // database whose admin still logs in with the retired default.
+        $admin = User::where('email', self::ADMIN_EMAIL)->where('role', 'admin')->first();
+        if ($admin) {
+            if (Hash::check('11111111', $admin->password)) {
+                $admin->password = self::ADMIN_PASSWORD; // hashed automatically via User model cast
+            }
+            if ($admin->name === 'P2GH Admin') {
+                $admin->name = 'Navodayan Admin';
+            }
+            if ($admin->isDirty()) {
+                $admin->save();
+            }
         }
 
         // ── Company Settings ───────────────────────────────────────
@@ -81,7 +105,7 @@ class DatabaseSeeder extends Seeder
                 'sub_title'   => 'Our Trusted Support',
                 'title_line1' => 'Passionate About Providing',
                 'title_line2' => 'Expert Care And Healing',
-                'description' => 'At P2GH - 24*7 Physiotherapy, our dedicated physiotherapists combine compassionate care, continuous support, and clinical expertise to relieve pain and help patients regain a better quality of life — any time of day or night.',
+                'description' => 'At Navodayan Neuroclinic & Neurorehab, our dedicated specialists combine compassionate care, continuous support, and clinical expertise to relieve pain and help patients regain a better quality of life.',
                 'button_text' => 'Know More',
                 'button_link' => '/about-us',
                 'doctor_name' => 'Dr. Rajpal',

@@ -86,7 +86,7 @@
         {{-- Logo --}}
         <a href="{{ url('/') }}" class="nav-logo">
             <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('front_assets/images/logo.png') }}"
-                 alt="{{ settings('company_short_name') ?? 'P2GH' }}">
+                 alt="{{ settings('company_short_name') ?? 'Navodayan' }}">
         </a>
 
         {{-- Menu --}}
@@ -157,11 +157,6 @@
                 <span>Camps</span>
                 <span class="btn-icon">↗</span>
             </a>
-            @auth
-                @if(auth()->user()->role === 'admin')
-                <a href="{{ url('/admin-dashboard') }}" class="btn-p2gh btn-p2gh-outline">Dashboard</a>
-                @endif
-            @endauth
         </div>
 
         {{-- Mobile toggle --}}
@@ -298,7 +293,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© {{ date('Y') }} {{ settings('company_name') ?? 'P2GH - 24*7 Physiotherapy' }}. All rights reserved.</p>
+            <p>© {{ date('Y') }} {{ settings('company_name') ?? 'Navodayan Neuroclinic & Neurorehab' }}. All rights reserved.</p>
             <p>Designed &amp; Developed by <a href="https://www.skorasoft.com/" target="_blank" rel="noopener">SkoraSoft</a></p>
         </div>
     </div>

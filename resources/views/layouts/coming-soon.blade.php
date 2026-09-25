@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title', '{{ settings("company_name") ?? "P2GH" }} || Coming Soon')
+@section('title', '{{ settings("company_name") ?? "Navodayan" }} || Coming Soon')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('front_assets/css/contact.css') }}">
 @endpush

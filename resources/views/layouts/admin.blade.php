@@ -33,7 +33,7 @@
             <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-white flex-grow-1">
                 <div class="d-flex align-items-center logo">
                     <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('assets-front/img-main.png') }}" 
-                         alt="P2GH Logo" 
+                         alt="Navodayan Logo" 
                          style="height: 50px; width: auto; max-width: 180px;">
                 </div>
             </a>
@@ -50,7 +50,7 @@
             <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-white d-none"> 
                 <li class="d-flex align-items-center logo mb-4">
                     <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) : asset('assets-front/img-main.png') }}" 
-                         alt="P2GH Logo" 
+                         alt="Navodayan Logo" 
                          style="height: 60px; width: 77%; object-fit: cover;">
                 </li>
             </a>
@@ -83,6 +83,15 @@
                 href="{{ route('admin.camps') }}">
                     <i class="bi bi-clipboard2-heart me-3"></i>
                     <span class="menu-text">Camps</span>
+                </a>
+            </li>
+
+             <li class="{{ request()->routeIs('admin.medical-supplies*') ? 'active' : '' }}">
+                <a class="nav-link d-flex align-items-center py-2
+                    {{ request()->routeIs('admin.medical-supplies*') ? 'active' : '' }}"
+                href="{{ route('admin.medical-supplies') }}">
+                    <i class="bi bi-box-seam me-3"></i>
+                    <span class="menu-text">Medical Supplies</span>
                 </a>
             </li>
 

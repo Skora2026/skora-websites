@@ -35,8 +35,7 @@
 
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Top Badge Text <small class="text-muted">(small pill above the heading)</small></label>
-                        <input type="text" class="form-control" name="badge_text" id="badge_text"
-                               placeholder="e.g. P2GH — 24×7 Physiotherapy">
+                        <input type="text" class="form-control" name="badge_text" id="badge_text"                                placeholder="e.g. Navodayan Neuroclinic & Neurorehab">
                         <small class="text-muted">Leave blank to use "[Company Short Name] — 24×7 Physiotherapy".</small>
                     </div>
                     <div class="col-md-6">

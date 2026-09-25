@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'P2GH & Reality Service') - @yield('error_code', 'Error')</title>
-    <meta name="description" content="@yield('description', 'P2GH & Reality Service')" />
+    <title>@yield('title', 'Navodayan Neuroclinic & Neurorehab') - @yield('error_code', 'Error')</title>
+    <meta name="description" content="@yield('description', 'Navodayan Neuroclinic & Neurorehab')" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
    <link rel="icon" type="image/png" href="{{ settings('favicon') ? asset('storage/' . settings('favicon')) 
@@ -304,9 +304,8 @@
     <div class="error-container">
         <div class="error-header">
             <h3 class="error-logo">
-                <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo')) 
-                            : asset('assets-front/img-main.png') }}" alt="{{ settings('company_short_name') ?? 'P2GH' }}">
-                <span class="logo-text">{{ settings('company_short_name') ?? 'P2GH & Reality Service' }}</span>
+                <img src="{{ settings('light_logo') ? asset('storage/' . settings('light_logo'))                             : asset('assets-front/img-main.png') }}" alt="{{ settings('company_short_name') ?? 'Navodayan' }}">
+                <span class="logo-text">{{ settings('company_short_name') ?? 'Navodayan' }}</span>
             </h3>
         </div>
         

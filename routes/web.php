@@ -24,6 +24,7 @@ use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CampController;
+use App\Http\Controllers\MedicalSupplyController;
 
 /* ───────────────────────────────────────────────
    PUBLIC ROUTES
@@ -191,6 +192,14 @@ Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->group(function ()
     Route::delete('/delete-camp/{id}', [CampController::class, 'destroy'])->name('admin.camps.destroy');
 
     Route::post('/camps/bulk-delete',      [CampController::class, 'bulkDelete'])->name('admin.camps.bulk-delete');
+
+    // ── Medical Supplies Inventory (internal, admin-only) ─────────
+    Route::get('/manage-medical-supplies',          [MedicalSupplyController::class, 'index'])->name('admin.medical-supplies');
+    Route::get('/medical-supplies/get',             [MedicalSupplyController::class, 'getData'])->name('admin.medical-supplies.get');
+    Route::post('/medical-supplies/store',          [MedicalSupplyController::class, 'store'])->name('admin.medical-supplies.store');
+    Route::post('/medical-supplies/update/{id}',    [MedicalSupplyController::class, 'update'])->name('admin.medical-supplies.update');
+    Route::delete('/medical-supplies/delete/{id}',  [MedicalSupplyController::class, 'destroy'])->name('admin.medical-supplies.destroy');
+    Route::post('/medical-supplies/bulk-delete',    [MedicalSupplyController::class, 'bulkDelete'])->name('admin.medical-supplies.bulk-delete');
 
     // ── FAQs (NEW) ────────────────────────────────────────────────
     Route::get('/manage-faqs',          [FaqController::class, 'index'])->name('admin.faqs');

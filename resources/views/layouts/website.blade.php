@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> {{ settings('company_short_name', 'P2GH')  }}|| @yield('title') </title>
+    <title> {{ settings('company_short_name', 'Navodayan')  }}|| @yield('title') </title>
     <link rel="icon" type="image/png" href="{{ settings('favicon') ? asset('storage/' . settings('favicon')) : asset('assets-front/img-main.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
@@ -206,7 +206,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="">
                     <a href="{{url('/')}}"><img src="{{asset('assets-front/img/logo-main.jpg')}}" class="rounded-circle" width="80" alt=""></a>
-                    <h5 class="mt-5">{{ settings('company_description', 'P2GH PLANNING SOMETHING ?')  }}</h5>
+                    <h5 class="mt-5">{{ settings('company_description', 'Navodayan Neuroclinic & Neurorehab')  }}</h5>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6">
@@ -330,7 +330,7 @@
             </div>
 
             <p class="copyright text-center mt-3">
-                © Copyright 2025 by {{ settings('company_name', 'P2GH')  }}. All rights reserved || designed by <a href="https://skorasoft.com/" target="_blank" class="text-decoration-none text-white">SkoraSoft</a>.
+                © Copyright 2025 by {{ settings('company_name', 'Navodayan Neuroclinic & Neurorehab')  }}. All rights reserved || designed by <a href="https://skorasoft.com/" target="_blank" class="text-decoration-none text-white">SkoraSoft</a>.
             </p>
         </div>
     </div>
